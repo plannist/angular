@@ -21,15 +21,15 @@
         angular.module('sampleApp', ['ngRoute']).
                 config(function ($routeProvider) {
                     $routeProvider
-                            .when('/home', {templateUrl: 'template/home.tmpl.html'})
-                            .when('/about', {templateUrl: 'template/about.tmpl.html', controller: 'aboutCtrl'})
-                            .when('/contact', {templateUrl: 'template/contact.tmpl.html', controller: 'contactCtrl'})
+                            .when('/home', {templateUrl: '/home.html'})
+                            .when('/about', {templateUrl: '/about.html', controller: 'aboutCtrl'})
+                            .when('/contact', {templateUrl: '/contact.html', controller: 'contactCtrl'})
                             .otherwise({redirectTo: '/home'});
                 }).
                 controller('mainCtrl', function ($scope, $route) {
                     $scope.route = $route;
                     $scope.routes = $route.routes;
-                    $scope.$on("$routeChangeSuccess", function (e, cRtoue, pRoute) {
+                    $scope.$on("$routeChangeSuccess", function (e, cRoute, pRoute) {
                         console.log("현재 라우트 정보: ", cRoute.loadedTemplateUrl);
                         if (pRoute) console.log("이전 라우트 정보: ", pRoute.loadedTemplateUrl);
                     });
