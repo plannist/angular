@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h3>static/home.html</h3>
-</body>
-</html>
+<h1>Greeting</h1>
+
+<div ng-show="authenticated">
+	<p>The Id is {{controller.greeting.id}}</p>
+	<p>The content is {{controller.greeting.content}}</p>
+	
+</div>
+<div ng-show="!authenticated">
+    <p>Login to see your greeting</p>
+    <h3>로그인하세요</h3>
+</div>
