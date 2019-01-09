@@ -30,6 +30,9 @@ angular.module("hello", ["ngRoute"])
 		console.log("{}{}{}$rootScope: "+$rootScope);
 		//console.log("{}{}{}$http: "+$http);
 		console.log("{}{}{}$location: "+$location);
-		
-	});
+    })
+    .controller("nameTest", function($rootScope){
+        $rootScope.Name = "oack";
+        $rootScope.FullName = "park";
+    });
 	

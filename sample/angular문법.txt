@@ -1,0 +1,7 @@
+1. ng-model="model"  : 콘트롤러 ($scope.model ) 혹은 {{model}} 로 불러올 수 있고 출력 할 수 있는 선언문
+
+2. ng-contoller="cont" : 콘트롤러에서 네이밍 String 값을  줘야 한다.
+
+3. ng-module = script 에서 ng-module="ng-app" 네이밍 String 값을 줘야 한다.
+
+ 
