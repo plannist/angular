@@ -1,0 +1,11 @@
+<div class="alert alert-danger" ng-show="controller.error">
+	There was a problem logging in. Please ty again. 
+	<br/> 로그인 문제가 발생했습니다. 다시 시도해주세요.
+</div>
+
+<form role="form" ng-submit="controller.login()">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" name="username" ng-model="controller.credentials.username">
+	</div>
+</form>
