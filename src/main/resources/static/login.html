@@ -3,9 +3,15 @@
 	<br/> 로그인 문제가 발생했습니다. 다시 시도해주세요.
 </div>
 
-<form role="form" ng-submit="controller.login()">
+<!-- <form role="form" ng-submit="controller.login()"> -->
+<form role="form" ng-submit="submit()" ng-controller="login">
 	<div class="form-group">
-		<label for="username">Username:</label>
-		<input type="text" class="form-control" id="username" name="username" ng-model="controller.credentials.username">
-	</div>
+        
+        <label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" name="username" ng-model="user" style="width:100px">
+        <br/>
+        <label for="password">password:</label>
+        <input type="text" class="form-contorl" id="password" name="password" ng-model="password" style="width:100px">
+        <input type="submit" id="submit" value="login" />
+    </div>
 </form>
