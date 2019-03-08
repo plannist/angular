@@ -7,22 +7,62 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/
 css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
 crossorigin="anonymous">
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-<script src="js/router.js"></script>
+<script src="www/lib/buyer-shedule-calendar/buyer-shedule-calendar.js"></script>
+    <!-- compiled css output -->
+    <link href="www/css/ionic.app.css" rel="stylesheet">
+    <link href="www/lib/ionic/ion-autocomplete/ion-autocomplete.min.css" rel="stylesheet">
+
+    <link href="www/css/default.css" rel="stylesheet">
+    <link href="www/css/style.css" rel="stylesheet">
+    <link href="www/css/reset.css" rel="stylesheet">
+    <link href="www/css/content.css" rel="stylesheet">
+    <link href="www/css/ionic.app.min.css" rel="stylesheet">
+    <link href="www/css/homeencar_m_new.css" rel="stylesheet">
+    <link href="www/css/layout.css" rel="stylesheet">
+    <link href="www/css/mobile2018.css" rel="stylesheet">
+    <link href="www/css/style.css" rel="stylesheet">
+    <link href="www/css/common.css" rel="stylesheet">
+
+    <script src="www/lib/ionic/js/jquery-1.10.2.min.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="www/lib/ionic/js/ionic.bundle.js"></script>
+    <script src="www/lib/ionic/ion-autocomplete/ion-autocomplete.js"></script>
+    <script src="www/lib/pmlist-shedule-calendar/pmlist-shedule-calendar.js"></script>
+    <script src="www/lib/signature_pad/signature_pad.js"></script>
+    <script src="www/lib/ion-sticky/ion-sticky.js"></script>
+    
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    
+    <script src="www/lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="www/lib/ionic/js/html2canvas.min.js"></script>
+    <script src="www/js/common-util.js"></script>
+    <script src="www/js/common-ucms-util.js"></script>
+    <script src="lib/directiveCalendar.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/calendar.js"></script>
+    
 </head>
 <body>
 
     <div class=""container">
         <div class="navbar">
-            <!-- <div class="navbar-inner"> -->
+            <div class="navbar-inner">
                 <a class="brand" href="#!"> routerSample </a>
                 <ul class="nav">
                     <li><a href="#!home">홈</a> </li>
                     <li><a href="#!userList">사용자 관리</a></li>
                     <li><a href="#!login">로그인</a></li>
-
+                    <li><a href="#!promise">$q, $qall</a></li>
+                    <li><a href="#!calendar">calendar</a></li>
                 </ul>
             </div>
         </div>

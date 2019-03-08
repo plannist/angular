@@ -57,7 +57,7 @@ public class AngularController {
 	
 	@RequestMapping(value="/login1", method=RequestMethod.POST)
 	//@RequestMapping(value="/login1")
-	public @ResponseBody String login(@RequestBody UserVO vo) {
+	public @ResponseBody String login(UserVO vo) {
 		System.out.println("login 인입"+vo);
 		return "";
 	}
