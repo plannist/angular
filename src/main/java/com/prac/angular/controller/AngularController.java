@@ -7,23 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prac.angular.model.UserVO;
 import com.prac.angular.model.define.User;
+import com.prac.angular.service.UserService;
 
 @Controller
 public class AngularController {
+	@Autowired
+	UserService userService;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String index() {
 		System.out.println("========= index 인입 =============");
 		UserVO user = new UserVO();
-		return "index.html";
+		return "prac.html";
 	}
 	
 	@RequestMapping("/resource")
@@ -57,8 +60,10 @@ public class AngularController {
 	
 	@RequestMapping(value="/login1", method=RequestMethod.POST)
 	//@RequestMapping(value="/login1")
-	public @ResponseBody String login(UserVO vo) {
-		System.out.println("login 인입"+vo);
+	public @ResponseBody String login(Map map) {
+		System.out.println("login 인입"+map);
+		List<Map<String, Object>> list = userService.getUserInfo(map);
+		System.out.println("userList: "+list.get(0));
 		return "";
 	}
 	

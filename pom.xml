@@ -17,7 +17,28 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
+		<org.springframework.security>4.2.3.RELEASE</org.springframework.security>
+		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
+		<logback-version>1.2.3</logback-version>
 	</properties>
+	
+<!-- Oracle Database driver Oracle Database driver  -->
+    <repositories>
+        <repository>
+            <id>oracle</id>
+            <name>ORACLE JDBC Repository</name>
+            <url>http://maven.jahia.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <scm>
+        <connection>scm:git:git@github.com:alexnederlof/Jasper-report-maven-plugin.git</connection>
+        <url>http://github.com/alexnederlof/Jasper-report-maven-plugin</url>
+        <developerConnection>scm:git:git@github.com:alexnederlof/Jasper-report-maven-plugin.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
 	<dependencies>
 		<dependency>
@@ -27,12 +48,12 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-<!-- 			<version>1.18.4</version> -->
+			<version>1.18.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>2.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -53,6 +74,58 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+	    <!-- JDBC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+        <!-- mybatis 설정 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!-- oracle jdbc -->
+		<!-- Oracle Database driver Oracle Database driver --> 
+
+
+        <!-- mybatis spring 연동 jar 파일 다운 설정 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+    		<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		<!-- mybatis spring 연동 DBCP -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		    <version>2.1.1</version>
+		</dependency>
+        
+        
+	    <dependency>
+	        <groupId>com.github.miemiedev</groupId>
+	        <artifactId>mybatis-paginator</artifactId>
+	        <version>1.2.13</version>
+	    </dependency>
 	</dependencies>
 
 	<build>
