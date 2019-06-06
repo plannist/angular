@@ -7,20 +7,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.prac.angular.dao.UserEntityDao;
 import com.prac.angular.model.UserVO;
 import com.prac.angular.model.define.User;
 import com.prac.angular.service.UserService;
+
+import entity.UserEntity;
 
 @Controller
 public class AngularController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	UserEntityDao userEntityDao;
+	
+	@PersistenceContext
+	public EntityManager entityManager;
+	
 	
 	@RequestMapping("/")
 	public String index() {
@@ -65,6 +78,17 @@ public class AngularController {
 		List<Map<String, Object>> list = userService.getUserInfo(map);
 		System.out.println("userList: "+list.get(0));
 		return "";
+	}
+	
+	@RequestMapping(value="/loginEntity", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> loginEntity(@RequestBody Map<String, Object> map){
+		Map<String, Object> result = new HashMap<>();
+		System.out.println("loginData 확인: "+map);
+		List<UserEntity>list = userEntityDao.findAll();
+		System.out.println("list 확인: "+list.get(0));
+		Object rs = entityManager.createNamedQuery("UserEntity.selectUserInfo").setParameter("map", map).getSingleResult();
+		System.out.println("rs 확인: "+rs);
+		return result;
 	}
 	
 }

@@ -48,6 +48,11 @@
 			templateUrl : 'admin.html',
 			controller : 'adminCtrl'
 		})
+		.state('hibernateLogin', {
+			url : '/hivernateLogin',
+			templateUrl : 'hibernateLogin.html',
+			controller : 'hibernateLoginCtrl'
+		})
 		$urlRouterProvider.otherwise('/');
 //        .when("/login", {templateUrl : "../login.html", controller : "loginPage"})
 //        .when("/promise", {templateUrl : "../promise.html", controller : "promiseCtrl"})
@@ -74,7 +79,7 @@
         // $scope.list = [];
         // $scope.list.push(this.user);
         // $scope.list.push(this.password);
-  
+    	console.log("login 인입");
         var headers = {"content-type" : "application/x-www-form-urlencoded; charset=UTF-8"};
         //var headers = {"content-type" : "application/json"}
         

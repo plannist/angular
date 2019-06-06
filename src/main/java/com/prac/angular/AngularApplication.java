@@ -1,5 +1,6 @@
 package com.prac.angular;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -15,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @SpringBootApplication
+@MapperScan(basePackages= {"com.prac.angular.mapper"})
 public class AngularApplication {
 
 	public static void main(String[] args) {
