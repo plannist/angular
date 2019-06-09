@@ -120,6 +120,8 @@ public class AngularController {
 		List<UserEntity> list = criteria.list();
 		System.out.println("criteria list확인: "+list.get(0));
 		
+		List<PhoneEntity>ls = new ArrayList<>(list.get(0).getPhone());
+		System.out.println("제발"+ls.get(0).getPhoneNumber());
 
 		PhoneEntity phoneInfo = phoneService.getOne(1L);
 		System.out.println("phoneInfo 확인: "+phoneInfo);
