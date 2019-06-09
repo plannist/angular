@@ -9,7 +9,7 @@ public interface UserService {
 
 	List<Map<String, Object>> getUserInfo(Map map);
 
-	UserEntity getOne(Long seq);
+	UserEntity getOne(String id);
 	
 	List<UserEntity> findAll();
 

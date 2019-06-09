@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity getOne(Long seq) {
-		return dao.getOne(seq);
+	public UserEntity getOne(String id) {
+		return dao.getOne(id);
 	}
 
 	@Override

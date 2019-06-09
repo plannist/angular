@@ -11,34 +11,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 //@NamedQuery(name="UserEntity.selectUserInfo", query="select * from Users")
 @Table(name="USERS")
-@Data
+@Getter
+@Setter
 public class UserEntity {
-	@Id
+	
 	@GeneratedValue
 	@Column(name="SEQ")
 	private Long seq;
 	
-//	@Column(name="ID")
-//	private String id;
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="ID")
+	@Id
+	@Column(name="ID")
+	private String id;
+	
+//	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	private Collection<PhoneEntity> phone;
 	
 	@Column(name="PWD")
 	private String pwd;
 	
 	@Column(name="PT_DT")
-	private Timestamp ptDt;
+	private String ptDt;
 	
 	@Column(name="LAST_CONNEC_DT")
-	private Timestamp lastConnectDt;
+	private String lastConnectDt;
 	
 	@Column(name="SEX")
 	private String sex;

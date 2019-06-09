@@ -14,7 +14,9 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,18 +108,24 @@ public class AngularController {
 		
 		
 		Criteria criteria = session.createCriteria(UserEntity.class);
-		Projection projection = Projections.property("id");
+		ProjectionList projection = Projections.projectionList();
+		criteria.createAlias("phone", "phone");
+		projection.add(Projections.property("seq"));
+		projection.add(Projections.property("id"));
+		projection.add(Projections.property("phone.phoneNumber"));
 		criteria.setProjection(projection);
-		criteria.add(Restrictions.eq("id", id));
+		
+//		criteria.setFetchMode("USER_ID", org.hibernate.FetchMode.JOIN);
+//		criteria.add(Restrictions.eq("seq", 1L));
 		List<UserEntity> list = criteria.list();
 		System.out.println("criteria list확인: "+list.get(0));
 		
 
 		PhoneEntity phoneInfo = phoneService.getOne(1L);
-		System.out.println("phoneInfo 확인: "+phoneInfo.toString());
+		System.out.println("phoneInfo 확인: "+phoneInfo);
 		
-		UserEntity userInfo = userService.getOne(1L);
-		System.out.println("userInfo 확인: "+userInfo.toString());
+		UserEntity userInfo = userService.getOne(id);
+		System.out.println("userInfo 확인: "+userInfo);
 
 		//Object rs = entityManager.createNamedQuery("UserEntity.selectUserInfo").setParameter("map", map).getSingleResult();
 		//System.out.println("rs 확인: "+rs);
