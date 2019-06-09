@@ -1,0 +1,30 @@
+<div class="calendar_left">
+	<div class="calendar_title">
+	    <p class="date">
+	        <button class="button button-small button-stable" ng-click="goToday()">오늘</button>
+	        <button class="button button-small button-stable" ng-click="prevMonth()">&#x2039;</button>
+	        {{selected.Year}}. {{selected.Month}}
+	        <button class="button button-small button-stable" ng-click="nextMonth()">&#x203a;</button>
+	    </p>
+	</div>
+	<div class="calendar">
+		<div class="week-area">
+			<span ng-repeat="day in weekDays() track by $index" class="weekday" ng-class="{red: $index == 0}">
+			{{day}}
+			</span>
+			
+		</div>
+		<div class="date-area">
+			<div class="date-area-row" ng-repeat="week in weeks track by $index">
+				<div class="date" 
+					 ng-class="{default : isDefaultDate(date), today : isToday(date), schedule : isEventDay(date).result, disabled : !date}"
+					 ng-repeat="date in week track by $index">
+					<span class="number" ng-class="{red : $index == 0 || isHoliday(date).result}">{{date.day}}</span>
+				</div>
+			</div>
+			
+			
+			</div>
+		</div>
+	</div>
+</div>
