@@ -1,6 +1,5 @@
 package com.prac.angular.entity;
 
-import java.sql.Timestamp;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -13,32 +12,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 //@NamedQuery(name="UserEntity.selectUserInfo", query="select * from Users")
 @Table(name="USERS")
-@Data
+@Getter
+@Setter
 public class UserEntity {
 	@Id
 	@GeneratedValue
 	@Column(name="SEQ")
 	private Long seq;
 	
-//	@Column(name="ID")
-//	private String id;
+	@Column(name="ID")
+	private String id;
+	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="ID")
+	@JoinColumn(name="USER_SEQ")
 	private Collection<PhoneEntity> phone;
 	
 	@Column(name="PWD")
 	private String pwd;
 	
 	@Column(name="PT_DT")
-	private Timestamp ptDt;
+	private String ptDt;
 	
 	@Column(name="LAST_CONNEC_DT")
-	private Timestamp lastConnectDt;
+	private String lastConnectDt;
 	
 	@Column(name="SEX")
 	private String sex;
@@ -46,4 +48,11 @@ public class UserEntity {
 	public UserEntity() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [seq=" + seq + ", id=" + id + ", phone=" + phone + ", pwd=" + pwd + ", ptDt=" + ptDt
+				+ ", lastConnectDt=" + lastConnectDt + ", sex=" + sex + "]";
+	}
+	
 }

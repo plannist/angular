@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @SpringBootApplication
 @MapperScan(basePackages= {"com.prac.angular.mapper"})
 public class AngularApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(AngularApplication.class, args);
 	}

@@ -6,22 +6,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="PHONE")
-@Data
+@Getter
+@Setter
 public class PhoneEntity {
 	@Id
 	@GeneratedValue
 	@Column(name="SEQ")
 	private Long seq;
 	
-	@Column(name="ID")
-	private String id;
+	@Column(name="USER_SEQ")
+	private Long userSeq;
 	
 	@Column(name="PHONE_NUMBER")
 	private String phoneNumber;
+
+	@Override
+	public String toString() {
+		return "PhoneEntity [seq=" + seq + ", userSeq=" + userSeq + ", phoneNumber=" + phoneNumber + "]";
+	}
 	
 	
 	
