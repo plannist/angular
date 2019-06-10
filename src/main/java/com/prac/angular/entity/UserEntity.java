@@ -18,8 +18,6 @@ import lombok.Setter;
 @Entity
 //@NamedQuery(name="UserEntity.selectUserInfo", query="select * from Users")
 @Table(name="USERS")
-@Getter
-@Setter
 public class UserEntity {
 	@Id
 	@GeneratedValue
@@ -47,6 +45,62 @@ public class UserEntity {
 	
 	public UserEntity() {
 		super();
+	}
+
+	public Long getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Long seq) {
+		this.seq = seq;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Collection<PhoneEntity> getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Collection<PhoneEntity> phone) {
+		this.phone = phone;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public String getPtDt() {
+		return ptDt;
+	}
+
+	public void setPtDt(String ptDt) {
+		this.ptDt = ptDt;
+	}
+
+	public String getLastConnectDt() {
+		return lastConnectDt;
+	}
+
+	public void setLastConnectDt(String lastConnectDt) {
+		this.lastConnectDt = lastConnectDt;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	@Override

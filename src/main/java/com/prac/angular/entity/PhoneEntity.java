@@ -11,8 +11,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name="PHONE")
-@Getter
-@Setter
 public class PhoneEntity {
 	@Id
 	@GeneratedValue
@@ -24,6 +22,46 @@ public class PhoneEntity {
 	
 	@Column(name="PHONE_NUMBER")
 	private String phoneNumber;
+	
+	public PhoneEntity() {
+		super();
+	}
+
+	public Long getSeq() {
+		return seq;
+	}
+
+
+
+	public void setSeq(Long seq) {
+		this.seq = seq;
+	}
+
+
+
+	public Long getUserSeq() {
+		return userSeq;
+	}
+
+
+
+	public void setUserSeq(Long userSeq) {
+		this.userSeq = userSeq;
+	}
+
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
 
 	@Override
 	public String toString() {

@@ -2,7 +2,9 @@ package com.prac.angular.controller;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -15,8 +17,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.internal.CriteriaImpl.Subcriteria;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +29,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.prac.angular.common.Utill;
 import com.prac.angular.dao.UserEntityDao;
 import com.prac.angular.entity.PhoneEntity;
 import com.prac.angular.entity.UserEntity;
 import com.prac.angular.model.UserVO;
 import com.prac.angular.model.define.User;
+import com.prac.angular.search.UserSearch;
 import com.prac.angular.service.PhoneService;
 import com.prac.angular.service.UserService;
 
@@ -38,8 +45,8 @@ public class AngularController {
 	UserService userService;
 	@Autowired
 	PhoneService phoneService;
-//	@Autowired
-//	UserEntityDao userEntityDao;
+	@Autowired
+	Utill utill;
 	
 	@PersistenceContext
 	public EntityManager entityManager;
@@ -102,22 +109,36 @@ public class AngularController {
 //		Session session = sessionFactory.openSession();
 //		System.out.println("sessionFactory 확인: "+sessionFactory.openSession());
 		Session session = (Session)entityManager.getDelegate();
-		System.out.println("entityManager 확인: "+session.isOpen());
+		utill.println("entityManager 확인: "+session.isOpen());
 		
 		
 		Criteria criteria = session.createCriteria(UserEntity.class);
-		Projection projection = Projections.property("id");
+		criteria.createAlias("phone", "phone");
+		
+		
+		ProjectionList projection = Projections.projectionList();
+		projection.add(Projections.property("seq"), "userSeq");
+		projection.add(Projections.property("id"), "userId");
+		projection.add(Projections.property("sex"), "userSex");
+		projection.add(Projections.property("lastConnectDt"), "userLastConnectDt");
+		projection.add(Projections.property("phone.phoneNumber"), "phonePhoneNumber");
+		
+		
 		criteria.setProjection(projection);
 		criteria.add(Restrictions.eq("id", id));
-		List<UserEntity> list = criteria.list();
-		System.out.println("criteria list확인: "+list.get(0));
+		criteria.setResultTransformer(Transformers.aliasToBean(UserSearch.class));
+		List<UserSearch> list = criteria.list();
+		utill.println("확인:"+list.get(0).toString());
+
+		Long seq = list.get(0).getUserSeq();
 		
 
-		PhoneEntity phoneInfo = phoneService.getOne(1L);
-		System.out.println("phoneInfo 확인: "+phoneInfo.toString());
+		PhoneEntity phoneInfo = phoneService.getOne(seq);
+		utill.println("phoneInfo 확인: "+phoneInfo.toString());
 		
-		UserEntity userInfo = userService.getOne(1L);
-		System.out.println("userInfo 확인: "+userInfo.toString());
+		//아래로직 기본적으로 user클래스 내의phoneEntity에 셋팅되서 리턴됨 단 쿼리문 2개 날림 where seq 로 users table과 phone table 2번 날림
+		UserEntity userInfo = userService.getOne(seq);
+		utill.println("userInfo 확인: "+userInfo.toString());
 
 		//Object rs = entityManager.createNamedQuery("UserEntity.selectUserInfo").setParameter("map", map).getSingleResult();
 		//System.out.println("rs 확인: "+rs);
