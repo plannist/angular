@@ -1,6 +1,7 @@
 package com.prac.angular;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -26,7 +27,11 @@ public class AngularApplication {
 	@Configuration
 	@Order(SecurityProperties.BASIC_AUTH_ORDER)
 	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		@Autowired
+		MyAuthenticationProvider autenticationProvider;
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception{
@@ -41,7 +46,13 @@ public class AngularApplication {
 			.antMatchers("/index.html")
 			.permitAll()
 			.and()
+			
 			.formLogin()
+			.loginPage("/login.do")
+			.loginProcessingUrl("/loginProcess.do")
+			.usernameParameter("id")
+			.passwordParameter("pwd")
+			.defaultSuccessUrl("/")
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.and().csrf().disable();
@@ -51,11 +62,17 @@ public class AngularApplication {
 		
 		@Override
 		protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+			//db 사용 로그인 시 호출
+			//흐름 .formLogin().loginProsessing() url 요청 -> builder.authenticationProvider(autenticationProvider)
+			//-> MyAuthenticationProvider -> UserDetailsServiceImpl -> 
+			builder.authenticationProvider(autenticationProvider);
+			
+			
+			/*//inmemory 사용 로그인 시 주석 해제
 			builder.inMemoryAuthentication()//.passwordEncoder(encoder)
 			.withUser("user").roles("USER").password("{noop}1234").and()
 			.withUser("admin").roles("ADMIN").password("{noop}1234");
-//			User.withDefaultPasswordEncoder().username("user").password("1234").roles("USER").build();
-//			User.withDefaultPasswordEncoder().username("admin").password("1234").roles("ADMIN").build();
+			*/
 		}
 	}
 

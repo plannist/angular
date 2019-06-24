@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity getOne(Long seq) {
 		return dao.getOne(seq);
+		
 	}
 
 	@Override
 	public List<UserEntity> findAll() {
 		return dao.findAll();
 	}
-
 }

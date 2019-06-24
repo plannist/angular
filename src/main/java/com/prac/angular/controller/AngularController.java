@@ -54,6 +54,15 @@ public class AngularController {
 //	@Resource(name="sessionFactory")
 //	private SessionFactory sessionFactory;
 	
+	@RequestMapping("/login.do")
+	public String login() {
+		return "login.html";
+	}
+	
+	@RequestMapping(value="/loginProcess.do", method=RequestMethod.POST)
+	public void loginProcess() {
+		System.out.println("========= loginProcess 인입 =============");
+	}
 	
 	@RequestMapping("/")
 	public String index() {

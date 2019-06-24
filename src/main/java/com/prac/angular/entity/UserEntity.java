@@ -1,6 +1,9 @@
 package com.prac.angular.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +26,7 @@ import lombok.Setter;
 @Entity
 //@NamedQuery(name="UserEntity.selectUserInfo", query="select * from Users")
 @Table(name="USERS")
-public class UserEntity {
+public class UserEntity implements UserDetails{
 	@Id
 	@GeneratedValue
 	@Column(name="SEQ")
@@ -42,6 +50,9 @@ public class UserEntity {
 	
 	@Column(name="SEX")
 	private String sex;
+	
+	@Column(name="AUTH")
+	private String auth;
 	
 	public UserEntity() {
 		super();
@@ -107,6 +118,51 @@ public class UserEntity {
 	public String toString() {
 		return "UserEntity [seq=" + seq + ", id=" + id + ", phone=" + phone + ", pwd=" + pwd + ", ptDt=" + ptDt
 				+ ", lastConnectDt=" + lastConnectDt + ", sex=" + sex + "]";
+	}
+
+	//Implements for UserDetails
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		ArrayList<GrantedAuthority> authorize = new ArrayList<>();
+		authorize.add(new SimpleGrantedAuthority(auth));
+		return authorize;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.pwd;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 }
