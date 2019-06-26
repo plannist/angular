@@ -27,15 +27,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prac.angular.common.Utill;
 import com.prac.angular.dao.UserEntityDao;
+import com.prac.angular.entity.BuildingEntity;
 import com.prac.angular.entity.PhoneEntity;
+import com.prac.angular.entity.PriceEntity;
 import com.prac.angular.entity.UserEntity;
 import com.prac.angular.model.UserVO;
 import com.prac.angular.model.define.User;
 import com.prac.angular.search.UserSearch;
+import com.prac.angular.service.BuildingService;
 import com.prac.angular.service.PhoneService;
 import com.prac.angular.service.UserService;
 
@@ -45,6 +49,8 @@ public class AngularController {
 	UserService userService;
 	@Autowired
 	PhoneService phoneService;
+	@Autowired
+	BuildingService buildingService;
 	@Autowired
 	Utill utill;
 	
@@ -152,6 +158,17 @@ public class AngularController {
 		//Object rs = entityManager.createNamedQuery("UserEntity.selectUserInfo").setParameter("map", map).getSingleResult();
 		//System.out.println("rs 확인: "+rs);
 		return result;
+	}
+	
+	@RequestMapping("/building")
+	public @ResponseBody List<BuildingEntity> building(@RequestBody String address){
+		System.out.println("building 인입 address: "+address);
+		List<BuildingEntity> building = buildingService.findByAddressContaining(address);
+		//문제점 리턴시 building 내에 price있고 price 내에 building있고 무한반복됨
+		//해결 방법 2가지 
+		//1. entity 내의 조인된 다른 entity 내의 foreign key 컬럼 에 @jsonIgnore 설정.
+		//2. 통합된 vo 클래스 생성후 리턴.
+		return building;
 	}
 	
 }

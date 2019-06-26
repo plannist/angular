@@ -139,8 +139,12 @@
         <version>1.1.1</version>
 
     </dependency>
-
-
+	
+	<!-- gson, json (HttpMessageNotWritableException 해결 @ResponseBody)-->
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+	</dependency>
 
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
@@ -148,6 +152,8 @@
 		<optional>true</optional>
 	</dependency>
 	</dependencies>
+	
+
 
 	<build>
 		<plugins>

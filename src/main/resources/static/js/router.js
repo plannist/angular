@@ -53,6 +53,11 @@
 			templateUrl : 'hibernateLogin.html',
 			controller : 'hibernateLoginCtrl'
 		})
+		.state('building', {
+			url : '/building',
+			templateUrl : 'building.html',
+			controller : 'buildingCtrl'
+		})
 		$urlRouterProvider.otherwise('/');
 //        .when("/login", {templateUrl : "../login.html", controller : "loginPage"})
 //        .when("/promise", {templateUrl : "../promise.html", controller : "promiseCtrl"})
