@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.prac.angular.entity.UserEntity;
@@ -23,7 +24,11 @@ public class MyAuthenticationProvider implements AuthenticationProvider, Seriali
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	UserDetailsService userDetailService;
+	private UserDetailsService userDetailService;
+	
+	@Autowired
+	@Lazy
+	private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
     public boolean supports(Class<? extends Object> authentication) {
@@ -37,17 +42,17 @@ public class MyAuthenticationProvider implements AuthenticationProvider, Seriali
 		UserDetails user;
 		String username = authentication.getName();
 		String password = (String) authentication.getCredentials();
-		System.out.println("=====MyAuthenticationProvider authenticate() 인입 username:"+username+", password: "+password);
+		String encodingPassword = passwordEncoder.encode(password);
 		
 		user = userDetailService.loadUserByUsername(username);
 		UserEntity manager = (UserEntity) user;
-		
+		System.out.println("=====MyAuthenticationProvider authenticate() 인입 username:"+username+", password: "+password);
 		System.out.println("=====MyAuthenticationProvider authenticate() 인입 manager 확인: "+manager.getPwd());
 		
-		return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
+		if(passwordEncoder.matches(encodingPassword, manager.getPassword())) {
+			return new UsernamePasswordAuthenticationToken(user, encodingPassword, user.getAuthorities());
+		}else {
+			return null;
+		}
 	}
-
-
-
-    // ...
 }

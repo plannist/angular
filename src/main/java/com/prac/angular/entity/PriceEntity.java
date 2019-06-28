@@ -9,17 +9,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name="PRICE")
 @Getter
 @Setter
-@ToString
 public class PriceEntity {
 	@Id
 	@GeneratedValue
@@ -50,5 +51,8 @@ public class PriceEntity {
 	@JsonIgnore
 	private BuildingEntity building;
 	
-	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
 }

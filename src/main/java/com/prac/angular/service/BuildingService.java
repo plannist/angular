@@ -7,4 +7,6 @@ import com.prac.angular.entity.BuildingEntity;
 public interface BuildingService {
 	List<BuildingEntity> findByAddress(String address);
 	List<BuildingEntity> findByAddressContaining(String address);
+	BuildingEntity findJoinPrice();
+	List<BuildingEntity> innerSelect(String address);
 }

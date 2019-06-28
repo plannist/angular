@@ -29,8 +29,15 @@ db:
 #    connection.username: station4
 #    connection.password: pjh871107
 
+
+
 logging:
   level:
+    root: info
+    com:
+      prac:
+        angular: debug
+
     org:
       hibernate:
         type:
@@ -38,7 +45,8 @@ logging:
             sql:
               BasicBinder: trace
              
-        
+      
+  
 spring:
     datasource:
       url: jdbc:oracle:thin:@fullhouse.c1d2wea4uxbf.ap-northeast-2.rds.amazonaws.com:1521:JAVA

@@ -163,11 +163,19 @@ public class AngularController {
 	@RequestMapping("/building")
 	public @ResponseBody List<BuildingEntity> building(@RequestBody String address){
 		System.out.println("building 인입 address: "+address);
-		List<BuildingEntity> building = buildingService.findByAddressContaining(address);
+		
 		//문제점 리턴시 building 내에 price있고 price 내에 building있고 무한반복됨
 		//해결 방법 2가지 
 		//1. entity 내의 조인된 다른 entity 내의 foreign key 컬럼 에 @jsonIgnore 설정.
 		//2. 통합된 vo 클래스 생성후 리턴.
+		List<BuildingEntity> building = buildingService.findByAddressContaining(address);
+		
+		//namedQuery 만의 문법이 존재 한다. 하.. native query가 아니다.
+		BuildingEntity namedQuery = buildingService.findJoinPrice();
+		System.out.println(namedQuery.toString());
+		
+		//customDao 접근
+		List<BuildingEntity> inner = buildingService.innerSelect(address);
 		return building;
 	}
 	

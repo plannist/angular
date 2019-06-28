@@ -1,7 +1,6 @@
 package com.prac.angular.entity;
 
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,18 +8,22 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Entity
 @Table(name="BUILDING")
 @Getter
 @Setter
-@ToString
+@NamedQuery(name="Building.findJoinPrice",
+			query="select distinct build from BuildingEntity build join fetch build.price where build.buildNo = 1")
 public class BuildingEntity {
 	
 	@Id
@@ -98,5 +101,8 @@ public class BuildingEntity {
 	@OneToMany(mappedBy="building", fetch = FetchType.LAZY)
 	private List<PriceEntity> price;
 	
-	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
 }

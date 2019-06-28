@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.prac.angular.entity.BuildingEntity;
 
-public interface BuildingEntityDao extends JpaRepository<BuildingEntity, Long> {
+public interface BuildingEntityDao extends JpaRepository<BuildingEntity, Long>, CustomDao {
 	List<BuildingEntity>findByAddress(String address);
 	List<BuildingEntity>findByAddressContaining(String address);
 }
