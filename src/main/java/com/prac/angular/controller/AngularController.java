@@ -43,7 +43,10 @@ import com.prac.angular.service.BuildingService;
 import com.prac.angular.service.PhoneService;
 import com.prac.angular.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class AngularController {
 	@Autowired
 	UserService userService;
@@ -85,7 +88,6 @@ public class AngularController {
 		map.put("content", "헬로 월드");
 		return map;
 	}
-	
 	
 	@RequestMapping("/json")
 	public @ResponseBody List<UserVO> json(){
@@ -177,6 +179,12 @@ public class AngularController {
 		//customDao 접근
 		List<BuildingEntity> inner = buildingService.innerSelect(address);
 		return building;
+	}
+	
+	@RequestMapping("/joinProcess")
+	public @ResponseBody UserEntity joinProcess(UserEntity vo) {
+		log.debug("vo확인 :", vo);
+		return vo;
 	}
 	
 }

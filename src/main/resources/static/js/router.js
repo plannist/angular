@@ -58,6 +58,11 @@
 			templateUrl : 'building.html',
 			controller : 'buildingCtrl'
 		})
+		.state('join', {
+			url : '/join',
+			templateUrl : 'join.html',
+			controller : 'joinCtrl'
+		})
 		$urlRouterProvider.otherwise('/');
 //        .when("/login", {templateUrl : "../login.html", controller : "loginPage"})
 //        .when("/promise", {templateUrl : "../promise.html", controller : "promiseCtrl"})
