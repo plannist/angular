@@ -30,7 +30,7 @@
 		.state('login', {
 			url : '/login',
 			templateUrl : 'login.html',
-			controller : 'login'
+			controller : 'loginCtrl'
 			
 		})
 		.state('promise', {
@@ -52,6 +52,16 @@
 			url : '/hivernateLogin',
 			templateUrl : 'hibernateLogin.html',
 			controller : 'hibernateLoginCtrl'
+		})
+		.state('building', {
+			url : '/building',
+			templateUrl : 'building.html',
+			controller : 'buildingCtrl'
+		})
+		.state('join', {
+			url : '/join',
+			templateUrl : 'join.html',
+			controller : 'joinCtrl'
 		})
 		$urlRouterProvider.otherwise('/');
 //        .when("/login", {templateUrl : "../login.html", controller : "loginPage"})
@@ -75,39 +85,7 @@
        
 
     })
-    .controller("login", function($scope, $http){
-        // $scope.list = [];
-        // $scope.list.push(this.user);
-        // $scope.list.push(this.password);
-    	console.log("login 인입");
-        var headers = {"content-type" : "application/x-www-form-urlencoded; charset=UTF-8"};
-        //var headers = {"content-type" : "application/json"}
-        
-        $scope.submit = function(){
-            // var data = {
-            //     id : $scope.user,
-            //     pwd : $scope.password
-            // };
-            // var obj = JSON.stringify(data);
-
-            console.log("id="+$scope.formData.id+", pwd="+$scope.formData.pwd);
-            console.log("submit === 인입 formApp data: "+$scope.formData);
-            $http({
-                method : "POST",
-                url : "login1",
-                //data : obj,
-                data : $.param($scope.formData),
-                //data : $scope.formData,
-                //paramSerializer : $httpParamSerializerJQLike,
-                headers : headers
-            });
-            // http.then(function(response){
-            //     var data = response.data;
-            // });
-        };
-        // ***** 중 요 : formData.id 와 UserVO 의 id  가 매 핑
-
-    })
+   
       .controller("promiseCtrl", function($scope, $timeout){
           console.log("$scope.answer: "+$scope.answer);
         var promise = $timeout(function(){
