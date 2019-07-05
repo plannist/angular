@@ -30,7 +30,7 @@
 		.state('login', {
 			url : '/login',
 			templateUrl : 'login.html',
-			controller : 'login'
+			controller : 'loginCtrl'
 			
 		})
 		.state('promise', {

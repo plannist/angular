@@ -27,7 +27,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider, Seriali
 	private UserDetailsService userDetailService;
 	
 	@Autowired
-	@Lazy
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Override

@@ -13,4 +13,8 @@ public interface UserService {
 	
 	List<UserEntity> findAll();
 
+	void save(UserEntity vo);
+
+	String passwordEncoding(UserEntity vo);
+
 }

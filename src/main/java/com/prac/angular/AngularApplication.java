@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -48,8 +49,8 @@ public class AngularApplication {
 			.and()
 			
 			.formLogin()
-			.loginPage("/login.do")
-			.loginProcessingUrl("/loginProcess.do")
+			.loginPage("/hivernateLogin")
+			.loginProcessingUrl("/login")
 			.usernameParameter("id")
 			.passwordParameter("pwd")
 			.defaultSuccessUrl("/")
@@ -73,6 +74,11 @@ public class AngularApplication {
 			.withUser("user").roles("USER").password("{noop}1234").and()
 			.withUser("admin").roles("ADMIN").password("{noop}1234");
 			*/
+		}
+		
+		@Bean
+		public BCryptPasswordEncoder bycriptPasswordEncoder() {
+			return new BCryptPasswordEncoder();
 		}
 	}
 

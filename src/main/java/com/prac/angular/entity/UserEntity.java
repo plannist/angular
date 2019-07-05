@@ -8,9 +8,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -19,7 +21,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 //@NamedQuery(name="UserEntity.selectUserInfo", query="select * from Users")
 @Table(name="USERS")
 public class UserEntity implements UserDetails{
@@ -29,14 +36,15 @@ public class UserEntity implements UserDetails{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
-	@Column(name="SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="usersSequence")
+	@SequenceGenerator(name="usersSequence", sequenceName="USERS_SEQ", allocationSize=1)
+	@Column(name="SEQ", columnDefinition="NUMBER")
 	private Long seq;
 	
 	@Column(name="ID")
 	private String id;
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="USER_SEQ")
 	private Collection<PhoneEntity> phone;
 	
@@ -57,62 +65,6 @@ public class UserEntity implements UserDetails{
 	
 	public UserEntity() {
 		super();
-	}
-
-	public Long getSeq() {
-		return seq;
-	}
-
-	public void setSeq(Long seq) {
-		this.seq = seq;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Collection<PhoneEntity> getPhone() {
-		return phone;
-	}
-
-	public void setPhone(Collection<PhoneEntity> phone) {
-		this.phone = phone;
-	}
-
-	public String getPwd() {
-		return pwd;
-	}
-
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
-
-	public String getPtDt() {
-		return ptDt;
-	}
-
-	public void setPtDt(String ptDt) {
-		this.ptDt = ptDt;
-	}
-
-	public String getLastConnectDt() {
-		return lastConnectDt;
-	}
-
-	public void setLastConnectDt(String lastConnectDt) {
-		this.lastConnectDt = lastConnectDt;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 
 	@Override
