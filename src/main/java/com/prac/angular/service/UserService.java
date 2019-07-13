@@ -9,8 +9,14 @@ public interface UserService {
 
 	List<Map<String, Object>> getUserInfo(Map map);
 
-	UserEntity getOne(String id);
+	UserEntity getOne(Long seq);
 	
 	List<UserEntity> findAll();
+
+	void save(UserEntity vo);
+
+	String passwordEncoding(UserEntity vo);
+
+	void parsist(UserEntity vo);
 
 }

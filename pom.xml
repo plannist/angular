@@ -139,15 +139,34 @@
         <version>1.1.1</version>
 
     </dependency>
-
-
-
+	
+	<!-- gson, json (HttpMessageNotWritableException 해결 @ResponseBody)-->
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.8.1</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa -->
+	<dependency>
+	    <groupId>com.querydsl</groupId>
+	    <artifactId>querydsl-jpa</artifactId>
+	</dependency>
+	
+	
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-configuration-processor</artifactId>
 		<optional>true</optional>
 	</dependency>
 	</dependencies>
+	
+
 
 	<build>
 		<plugins>

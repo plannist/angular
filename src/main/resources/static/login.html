@@ -1,17 +1,33 @@
-<div class="alert alert-danger" ng-show="controller.error">
-	There was a problem logging in. Please ty again. 
-	<br/> 로그인 문제가 발생했습니다. 다시 시도해주세요.
-</div>
-
-<!-- <form role="form" ng-submit="controller.login()"> -->
-<form role="form" ng-submit="submit()" ng-controller="login" >
-	<div class="form-group">
-        
-        <label for="username">Username:</label>
-		<input type="text" class="form-control" id="id" name="id" ng-model="formData.id" style="width:100px">
-        <br/>
-        <label for="password">password:</label>
-        <input type="text" class="form-contorl" id="pwd" name="pwd" ng-model="formData.pwd" style="width:100px">
-        <input type="submit" id="submit" value="login" />
-    </div>
-</form>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript">
+// 			function login(){
+// 				console.log("login submit 시작");
+// 				$("#login").submit();
+// 			}
+			
+		</script>
+	</head>
+	<body>
+<!-- 		<div class="alert alert-danger" ng-show="controller.error"> -->
+<!-- 			There was a problem logging in. Please ty again.  -->
+<!-- 			<br/> 로그인 문제가 발생했습니다. 다시 시도해주세요. -->
+<!-- 		</div> -->
+		
+		<!-- <form role="form" ng-submit="controller.login()"> -->
+		<form method="post" action="/loginProcess.do" id="login" class="login">
+			<div class="form-group">
+		        
+		        <label for="username">Username:</label>
+				<input type="text" class="form-control" id="id" name="id" style="width:100px">
+		        <br/>
+		        <label for="password">password:</label>
+		        <input type="text" class="form-contorl" id="pwd" name="pwd" style="width:100px">
+<!-- 		        <a  href="javascript:login();" >로그인</a> -->
+		        <input type="submit" value="로그인"/>
+		    </div>
+		</form>
+	</body>
+</html>

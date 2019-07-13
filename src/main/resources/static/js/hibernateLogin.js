@@ -3,7 +3,7 @@
  */
 angular.module('ex')
 .controller('hibernateLoginCtrl', function($scope, $http){
-	console.log("hibernateLogin 인입");
+	console.log("hibernateLogin 인입123");
 	//var headers = {"content-type" : "application/x-www-form-urlencoded; charset=UTF-8"};
 	var headers = {"content-type" : "application/json; charset=UTF-8"};
 	$scope.submit = function(){
@@ -13,8 +13,9 @@ angular.module('ex')
 		$http({
 			method : "POST",
 			url : "loginEntity",
-			data : data,
-			headers : headers
+			data : {'id':$scope.formData.id, 'pwd' : $scope.formData.pwd}
+//			data : data,
+//			headers : headers
 		}).then(function(response){
 			console.log("response: ", response);
 		});

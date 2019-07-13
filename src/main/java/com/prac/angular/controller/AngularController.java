@@ -181,11 +181,19 @@ public class AngularController {
 		return building;
 	}
 	
-	@RequestMapping("/joinProcess")
-	public @ResponseBody void joinProcess(Map param) {
-		log.debug("vo확인 :{}"+param);
-		System.out.println("vo 확인 sys : "+param);
+	//대박 join.js 에서 object-> Array -> object 구조를 만들어줬더니 UserEntity.phone.phoneNumber 에 자동으로 매핑된다. 
+	@RequestMapping(value="/joinProcess", method=RequestMethod.POST)
+	public @ResponseBody UserEntity joinProcess(@RequestBody UserEntity vo) {
+		log.debug("vo확인 :"+vo.toString());
+		UserEntity id = userService.getOne(1L);
+		log.debug("id확인: "+id.toString());
 		
+		String encodingPassword = userService.passwordEncoding(vo);
+		log.debug("encodingPassword확인:"+encodingPassword);
+		vo.setPwd(encodingPassword);
+		userService.save(vo);
+
+		return null;
 	}
 	
 }
