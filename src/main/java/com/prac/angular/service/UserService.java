@@ -17,6 +17,9 @@ public interface UserService {
 
 	String passwordEncoding(UserEntity vo);
 
+<<<<<<< HEAD
 	void parsist(UserEntity vo);
 
+=======
+>>>>>>> branch 'master' of https://github.com/plannist/angular.git
 }

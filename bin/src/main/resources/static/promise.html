@@ -1,0 +1,20 @@
+
+<body>
+    <div class="container">
+        <h1> 5초안에 답을 말하시오.</h1>
+        <div class="well clearfix">
+        	<div>
+        		10-1+29+2-1 = <input ng-model="answer" ng-disabled="result">
+        	</div>
+        	<div class="pull-right">
+        		<button class="btn btn-info" ng-click="giveUp()">포기</button>
+        	</div>
+        </div>
+        <div class="row">
+        	<div class="col-lg-12">
+        		<p class="well">{{result}} <br>{{info}}</p>
+        	</div>
+        </div>
+    </div>
+
+</body>
