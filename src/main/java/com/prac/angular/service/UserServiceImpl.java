@@ -24,11 +24,10 @@ public class UserServiceImpl implements UserService {
 	UserEntityDao dao;
 	@Autowired
 	BCryptPasswordEncoder encoder;
-<<<<<<< HEAD
+
 	@PersistenceContext
 	EntityManager entityManager;
-=======
->>>>>>> branch 'master' of https://github.com/plannist/angular.git
+
 	
 	@Override
 	public List<Map<String, Object>> getUserInfo(Map map) {
@@ -58,7 +57,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return encoder.encode(vo.getPwd());
 	}
-<<<<<<< HEAD
 
 	@Override
 	public void parsist(UserEntity vo) {
@@ -69,9 +67,6 @@ public class UserServiceImpl implements UserService {
 		for(PhoneEntity phone : col) {
 			phone.setUsers(vo);
 			entityManager.persist(phone);
-		}
-		
+		}		
 	}
-=======
->>>>>>> branch 'master' of https://github.com/plannist/angular.git
 }
