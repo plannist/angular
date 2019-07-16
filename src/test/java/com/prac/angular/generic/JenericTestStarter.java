@@ -14,5 +14,4 @@ public class JenericTestStarter {
 		
 		System.out.println("go Get: {}"+generic.get("key3"));
 	}
-	
 }

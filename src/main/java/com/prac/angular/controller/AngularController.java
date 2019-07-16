@@ -192,7 +192,7 @@ public class AngularController {
 		log.debug("encodingPassword확인:"+encodingPassword);
 		vo.setPwd(encodingPassword);
 		//userService.save(vo);
-		userService.emSave(vo);
+		userService.parsist(vo);
 
 		return null;
 	}

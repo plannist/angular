@@ -55,3 +55,4 @@ public class MyAuthenticationProvider implements AuthenticationProvider, Seriali
 		}
 	}
 }
+

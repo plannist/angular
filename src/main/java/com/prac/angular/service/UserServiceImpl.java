@@ -1,5 +1,7 @@
 package com.prac.angular.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +24,10 @@ public class UserServiceImpl implements UserService {
 	UserEntityDao dao;
 	@Autowired
 	BCryptPasswordEncoder encoder;
+
 	@PersistenceContext
-	EntityManager entity;
+	EntityManager entityManager;
+
 	
 	@Override
 	public List<Map<String, Object>> getUserInfo(Map map) {
@@ -53,13 +57,16 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return encoder.encode(vo.getPwd());
 	}
-	
+
 	@Override
-	public void emSave(UserEntity vo) {
-//		List<PhoneEntity> list = (List<PhoneEntity>) vo.getPhone();
-//		for(PhoneEntity data : list) {
-//			entity.persist(data);
-//		}
-		entity.persist(vo);
+	public void parsist(UserEntity vo) {
+		Collection<PhoneEntity> col = new ArrayList<>();
+		col = vo.getPhone();
+		vo.setPhone(null);
+		entityManager.persist(vo);
+		for(PhoneEntity phone : col) {
+			phone.setUsers(vo);
+			entityManager.persist(phone);
+		}		
 	}
 }
