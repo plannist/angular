@@ -191,7 +191,8 @@ public class AngularController {
 		String encodingPassword = userService.passwordEncoding(vo);
 		log.debug("encodingPassword확인:"+encodingPassword);
 		vo.setPwd(encodingPassword);
-		userService.save(vo);
+		//userService.save(vo);
+		userService.emSave(vo);
 
 		return null;
 	}

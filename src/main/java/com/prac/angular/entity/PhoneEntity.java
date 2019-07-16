@@ -29,11 +29,11 @@ public class PhoneEntity {
 	@Column(name="SEQ")
 	private Long seq;
 	
-	@Column(name="USER_SEQ", columnDefinition="NUMBER", insertable=false, updatable=false)
-	private Long userSeq;
-	
+//	@Column(name="USER_SEQ", columnDefinition="NUMBER", updatable=false)
+//	private Long userSeq;
+//	@JoinColumn(name="USER_SEQ", referencedColumnName="SEQ")
 	@ManyToOne(optional=false)
-	@JoinColumn(name="USER_SEQ", referencedColumnName="SEQ")
+	@JoinColumn(name="USER_SEQ")
 	@JsonIgnore
 	private UserEntity users;
 	

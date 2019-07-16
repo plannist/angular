@@ -17,4 +17,6 @@ public interface UserService {
 
 	String passwordEncoding(UserEntity vo);
 
+	void emSave(UserEntity vo);
+
 }

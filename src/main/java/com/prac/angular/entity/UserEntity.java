@@ -44,8 +44,8 @@ public class UserEntity implements UserDetails{
 	@Column(name="ID")
 	private String id;
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="USER_SEQ")
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true, mappedBy="users")
+//	@JoinColumn(name="USER_SEQ")
 	private Collection<PhoneEntity> phone;
 	
 	@Column(name="PWD")
