@@ -68,11 +68,6 @@ public class AngularController {
 		return "login.html";
 	}
 	
-	@RequestMapping(value="/loginProcess.do", method=RequestMethod.POST)
-	public void loginProcess() {
-		System.out.println("========= loginProcess 인입 =============");
-	}
-	
 	@RequestMapping("/")
 	public String index() {
 		System.out.println("========= index 인입 =============");
@@ -111,16 +106,17 @@ public class AngularController {
 	@RequestMapping(value="/login1", method=RequestMethod.POST)
 	//@RequestMapping(value="/login1")
 	public @ResponseBody String login(Map map) {
-		System.out.println("login 인입"+map);
+		System.out.println("login1 인입: "+map);
 		List<Map<String, Object>> list = userService.getUserInfo(map);
 		System.out.println("userList: "+list.get(0));
 		return "";
 	}
 	
+	//hibernate login process
 	@RequestMapping(value="/loginEntity", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> loginEntity(@RequestBody Map<String, Object> param){
 		Map<String, Object> result = new HashMap<>();
-		System.out.println("loginData 확인: "+param);
+		System.out.println("loginEntity 인입 -loginData 확인: "+param);
 		String id = param.get("id").toString();
 		
 //		Session session = sessionFactory.openSession();

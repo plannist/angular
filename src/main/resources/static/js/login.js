@@ -19,7 +19,7 @@ angular.module('ex').controller('loginCtrl', function($scope, $http){
         console.log("submit === 인입 formApp data: "+$scope.formData);
         $http({
             method : "POST",
-            url : "login1",
+            url : "loginProcess",
             //data : obj,
             data : $.param($scope.formData),
             //data : $scope.formData,

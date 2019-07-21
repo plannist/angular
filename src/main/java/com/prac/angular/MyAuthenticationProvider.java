@@ -48,7 +48,8 @@ public class MyAuthenticationProvider implements AuthenticationProvider, Seriali
 		System.out.println("=====MyAuthenticationProvider authenticate() 인입 username:"+username+", password: "+password);
 		System.out.println("=====MyAuthenticationProvider authenticate() 인입 manager 확인: "+manager.getPwd());
 		
-		if(passwordEncoder.matches(encodingPassword, manager.getPassword())) {
+		if(passwordEncoder.matches(password, manager.getPassword())) {
+			System.out.println("matches 성공");
 			return new UsernamePasswordAuthenticationToken(user, encodingPassword, user.getAuthorities());
 		}else {
 			return null;
