@@ -49,8 +49,8 @@ public class AngularApplication {
 			.and()
 			
 			.formLogin()
-			.loginPage("/hivernateLogin")
-			.loginProcessingUrl("/login")
+			.loginPage("/login")
+			.loginProcessingUrl("/loginProcess")
 			.usernameParameter("id")
 			.passwordParameter("pwd")
 			.defaultSuccessUrl("/")
