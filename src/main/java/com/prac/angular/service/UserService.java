@@ -19,4 +19,6 @@ public interface UserService {
 
 	void parsist(UserEntity vo);
 
+	UserEntity findById(String id);
+
 }

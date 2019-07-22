@@ -33,6 +33,8 @@ public class AngularApplication {
 		
 		@Autowired
 		MyAuthenticationProvider autenticationProvider;
+		@Autowired
+		LoginSuccessHandler loginSuccessHandler;
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception{
@@ -50,10 +52,11 @@ public class AngularApplication {
 			
 			.formLogin()
 			.loginPage("/login")
+			.successHandler(loginSuccessHandler)
 			.loginProcessingUrl("/loginProcess")
 			.usernameParameter("id")
 			.passwordParameter("pwd")
-			.defaultSuccessUrl("/")
+			//.defaultSuccessUrl("/")
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.and().csrf().disable();

@@ -69,4 +69,10 @@ public class UserServiceImpl implements UserService {
 			entityManager.persist(phone);
 		}		
 	}
+
+	@Override
+	public UserEntity findById(String id) {
+		// TODO Auto-generated method stub
+		return dao.findById(id);
+	}
 }

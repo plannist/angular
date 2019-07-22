@@ -2,6 +2,7 @@
  angular.module("ex", ["ngRoute", "park-calendar", 'ui.router'])
  	.run(function($rootScope, $timeout, $state){
  		console.log('run 인입');
+ 		
  		$rootScope.locationPage = function(state){
  			console.log("응?: ", state);
  			$timeout(function(){
@@ -17,9 +18,8 @@
  		
         $stateProvider
 
-        .state("home", {
-        	url : "/home"
-        	,templateUrl : 'home.html'
+        .state("/", {
+        	url : "/"
         	,controller : 'homeCtrl'
         })
         .state("userList", {

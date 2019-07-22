@@ -12,6 +12,8 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.prac.angular.common.Utill;
 import com.prac.angular.dao.UserEntityDao;
@@ -70,9 +73,15 @@ public class AngularController {
 	
 	@RequestMapping("/")
 	public String index() {
-		System.out.println("========= index 인입 =============");
-		UserVO user = new UserVO();
 		return "prac.html";
+	}
+	
+	@RequestMapping("/users")
+	public @ResponseBody UserEntity users(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userId");
+		UserEntity entity = userService.findById(id);
+		return entity;
 	}
 	
 	@RequestMapping("/resource")
@@ -190,7 +199,7 @@ public class AngularController {
 		//userService.save(vo);
 		userService.parsist(vo);
 
-		return null;
+		return vo;
 	}
 	
 }
