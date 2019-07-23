@@ -68,6 +68,8 @@ spring:
 #      naming:
 #        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
     
+#    mvc:
+#    static-path-pattern: /resources/static/**    
  
   
 ---
@@ -78,4 +80,4 @@ spring:
     aggressiveLazyLoading: false
     mapUnderscoreToCamelCase: true
     
-    
+  

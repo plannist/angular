@@ -73,7 +73,8 @@ public class AngularController {
 	
 	@RequestMapping("/")
 	public String index() {
-		return "prac.html";
+		log.debug("index인입 ============");
+		return "redirect:/prac.html";
 	}
 	
 	@RequestMapping("/users")

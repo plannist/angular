@@ -63,6 +63,14 @@
 			templateUrl : 'join.html',
 			controller : 'joinCtrl'
 		})
+		.state('userInfo', {
+			url : '/userInfo',
+			controller : 'userInfoCtrl'
+		})
+		.state('logout', {
+			url : '/logout',
+			controller : 'logoutCtrl'
+		})
 		$urlRouterProvider.otherwise('/');
 //        .when("/login", {templateUrl : "../login.html", controller : "loginPage"})
 //        .when("/promise", {templateUrl : "../promise.html", controller : "promiseCtrl"})

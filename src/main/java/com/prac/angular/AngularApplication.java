@@ -6,7 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,9 +17,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+
+import com.prac.angular.controller.JSPController;
 
 
-
+//특정 컴포넌트 스캔 제외 ~
+//@ComponentScan(excludeFilters = {@Filter(
+//type = FilterType.ASSIGNABLE_TYPE,
+//classes = {JSPController.class}
+//)}
+//)
 @SpringBootApplication
 @MapperScan(basePackages= {"com.prac.angular.mapper"})
 public class AngularApplication {
@@ -35,6 +48,10 @@ public class AngularApplication {
 		MyAuthenticationProvider autenticationProvider;
 		@Autowired
 		LoginSuccessHandler loginSuccessHandler;
+		@Autowired
+		LogoutSuccessHandler logoutSuccessHandler;
+		@Autowired
+		LogoutHandler logoutHandler;
 		
 		@Override
 		protected void configure(HttpSecurity http) throws Exception{
@@ -46,7 +63,7 @@ public class AngularApplication {
 			.permitAll()
 			.and()
 			.authorizeRequests()
-			.antMatchers("/index.html")
+			.antMatchers("/test")
 			.permitAll()
 			.and()
 			
@@ -58,7 +75,11 @@ public class AngularApplication {
 			.passwordParameter("pwd")
 			//.defaultSuccessUrl("/")
 			.and()
-			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logout()
+			//.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutUrl("/logout")
+			//.addLogoutHandler(logoutHandler)
+			.logoutSuccessHandler(logoutSuccessHandler)
 			.and().csrf().disable();
 			//.anyRequest()
 			//.authenticated();
@@ -83,6 +104,7 @@ public class AngularApplication {
 		public BCryptPasswordEncoder bycriptPasswordEncoder() {
 			return new BCryptPasswordEncoder();
 		}
+		
 	}
 
 }
