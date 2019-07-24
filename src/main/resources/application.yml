@@ -32,11 +32,13 @@ db:
 
 
 logging:
+  file: /home/ubuntu/spring-boot-app.log
   level:
     root: info
     com:
       prac:
         angular: debug
+   
 
     org:
       hibernate:
