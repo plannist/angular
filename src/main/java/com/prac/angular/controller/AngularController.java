@@ -2,42 +2,34 @@ package com.prac.angular.controller;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.internal.CriteriaImpl.Subcriteria;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.prac.angular.common.Utill;
-import com.prac.angular.dao.UserEntityDao;
 import com.prac.angular.entity.BuildingEntity;
 import com.prac.angular.entity.PhoneEntity;
-import com.prac.angular.entity.PriceEntity;
 import com.prac.angular.entity.UserEntity;
 import com.prac.angular.model.UserVO;
 import com.prac.angular.model.define.User;
@@ -191,14 +183,20 @@ public class AngularController {
 	@RequestMapping(value="/joinProcess", method=RequestMethod.POST)
 	public @ResponseBody UserEntity joinProcess(@RequestBody UserEntity vo) {
 		log.debug("vo확인 :"+vo.toString());
-		UserEntity id = userService.getOne(1L);
-		log.debug("id확인: "+id.toString());
+		UserEntity user = userService.findById(vo.getId());
+		log.debug("user 확인: {}", user);
 		
-		String encodingPassword = userService.passwordEncoding(vo);
-		log.debug("encodingPassword확인:"+encodingPassword);
-		vo.setPwd(encodingPassword);
-		//userService.save(vo);
-		userService.parsist(vo);
+		if(Utill.isNullOrEmpty(user)) {
+			String encodingPassword = userService.passwordEncoding(vo);
+			log.debug("encodingPassword확인:"+encodingPassword);
+			vo.setPwd(encodingPassword);
+			userService.parsist(vo);
+		}else {
+			vo.setId(null);
+		}
+		//log.debug("id확인: "+id.toString());
+		
+		
 
 		return vo;
 	}

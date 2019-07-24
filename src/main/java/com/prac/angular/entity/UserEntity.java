@@ -1,5 +1,6 @@
 package com.prac.angular.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -52,16 +53,16 @@ public class UserEntity implements UserDetails{
 	private String pwd;
 	
 	@Column(name="PT_DT")
-	private String ptDt;
+	private String ptDt = LocalDateTime.now().toString();
 	
 	@Column(name="LAST_CONNEC_DT")
-	private String lastConnectDt;
+	private String lastConnectDt = LocalDateTime.now().toString();;
 	
 	@Column(name="SEX")
 	private String sex;
 	
-	@Column(name="AUTH")
-	private String auth;
+	@Column(name="AUTH", columnDefinition = "varchar(50) default 'user'")
+	private String auth = "user";
 	
 	public UserEntity() {
 		super();

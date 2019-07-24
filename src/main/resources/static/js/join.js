@@ -29,6 +29,12 @@ angular.module('ex').controller('joinCtrl', function($scope, $http){
 			data: data
 		}).then(function(res){
 			console.log("res:", res);
+			if(!res.data.id){
+				alert("이미 사용중인 아이디입니다.");
+			}else{
+				location.href = "/";
+			}
+			
 		});
 	}
 });
