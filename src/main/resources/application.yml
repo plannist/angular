@@ -49,9 +49,12 @@ logging:
   
 spring:
     datasource:
-      url: jdbc:oracle:thin:@fullhouse.c1d2wea4uxbf.ap-northeast-2.rds.amazonaws.com:1521:JAVA
+#      url: jdbc:oracle:thin:@fullhouse.c1d2wea4uxbf.ap-northeast-2.rds.amazonaws.com:1521:JAVA
+      url: jdbc:oracle:thin:@plannist.cn97lepujcj7.ap-northeast-2.rds.amazonaws.com:1521:ORCL
       driver-class-name: oracle.jdbc.OracleDriver
-      username: station4
+#      username: station4
+#      password: pjh871107
+      username: plannist
       password: pjh871107
     jpa:
       show-sql: true
