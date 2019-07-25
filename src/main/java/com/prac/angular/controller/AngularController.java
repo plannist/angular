@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.prac.angular.common.Utill;
+import com.prac.angular.common.Utils;
 import com.prac.angular.entity.BuildingEntity;
 import com.prac.angular.entity.PhoneEntity;
 import com.prac.angular.entity.UserEntity;
@@ -49,8 +49,6 @@ public class AngularController {
 	PhoneService phoneService;
 	@Autowired
 	BuildingService buildingService;
-	@Autowired
-	Utill utill;
 	
 	@PersistenceContext
 	public EntityManager entityManager;
@@ -124,7 +122,7 @@ public class AngularController {
 //		Session session = sessionFactory.openSession();
 //		System.out.println("sessionFactory 확인: "+sessionFactory.openSession());
 		Session session = (Session)entityManager.getDelegate();
-		utill.println("entityManager 확인: "+session.isOpen());
+		Utils.println("entityManager 확인: "+session.isOpen());
 		
 		
 		Criteria criteria = session.createCriteria(UserEntity.class);
@@ -143,17 +141,17 @@ public class AngularController {
 		criteria.add(Restrictions.eq("id", id));
 		criteria.setResultTransformer(Transformers.aliasToBean(UserSearch.class));
 		List<UserSearch> list = criteria.list();
-		utill.println("확인:"+list.get(0).toString());
+		Utils.println("확인:"+list.get(0).toString());
 
 		Long seq = list.get(0).getUserSeq();
 		
 
 		PhoneEntity phoneInfo = phoneService.getOne(seq);
-		utill.println("phoneInfo 확인: "+phoneInfo.toString());
+		Utils.println("phoneInfo 확인: "+phoneInfo.toString());
 		
 		//아래로직 기본적으로 user클래스 내의phoneEntity에 셋팅되서 리턴됨 단 쿼리문 2개 날림 where seq 로 users table과 phone table 2번 날림
 		UserEntity userInfo = userService.getOne(seq);
-		utill.println("userInfo 확인: "+userInfo.toString());
+		Utils.println("userInfo 확인: "+userInfo.toString());
 
 		//Object rs = entityManager.createNamedQuery("UserEntity.selectUserInfo").setParameter("map", map).getSingleResult();
 		//System.out.println("rs 확인: "+rs);
@@ -183,10 +181,8 @@ public class AngularController {
 	@RequestMapping(value="/joinProcess", method=RequestMethod.POST)
 	public @ResponseBody UserEntity joinProcess(@RequestBody UserEntity vo) {
 		log.debug("vo확인 :"+vo.toString());
-		UserEntity user = userService.findById(vo.getId());
-		log.debug("user 확인: {}", user);
 		
-		if(Utill.isNullOrEmpty(user)) {
+		if(Utils.isNullOrEmpty(userService.findById(vo.getId()))) {
 			String encodingPassword = userService.passwordEncoding(vo);
 			log.debug("encodingPassword확인:"+encodingPassword);
 			vo.setPwd(encodingPassword);
@@ -194,7 +190,7 @@ public class AngularController {
 		}else {
 			vo.setId(null);
 		}
-		//log.debug("id확인: "+id.toString());
+		log.debug("리턴전 vo확인: "+vo.toString());
 		
 		
 
