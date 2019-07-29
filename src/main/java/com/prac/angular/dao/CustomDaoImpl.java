@@ -12,6 +12,8 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.prac.angular.common.Pageable;
+import com.prac.angular.common.PaginatedList;
 import com.prac.angular.entity.BuildingEntity;
 
 import lombok.extern.slf4j.Slf4j;

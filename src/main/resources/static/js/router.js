@@ -67,6 +67,10 @@
 			url : '/userInfo',
 			controller : 'userInfoCtrl'
 		})
+		.state('buildList', {
+			url: '/buildList',
+			controller: 'buildListCtrl'
+		})
 		.state('logout', {
 			url : '/logout',
 			controller : 'logoutCtrl'

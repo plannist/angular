@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,13 +19,16 @@ import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.prac.angular.common.BaseVO;
+import com.prac.angular.common.PageRequest;
+
 @Entity
 @Table(name="BUILDING")
 @Getter
 @Setter
 @NamedQuery(name="Building.findJoinPrice",
 			query="select distinct build from BuildingEntity build join fetch build.price where build.buildNo = 1")
-public class BuildingEntity {
+public class BuildingEntity{
 	
 	@Id
 	@GeneratedValue

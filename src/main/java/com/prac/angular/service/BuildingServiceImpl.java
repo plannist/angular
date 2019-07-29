@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prac.angular.common.PageRequest;
+import com.prac.angular.common.PaginatedList;
 import com.prac.angular.dao.BuildingEntityDao;
 import com.prac.angular.dao.NamedQueryDao;
 import com.prac.angular.entity.BuildingEntity;
+import com.prac.angular.model.BuildingVO;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
@@ -37,4 +40,9 @@ public class BuildingServiceImpl implements BuildingService {
 		return dao.innerSelect(address);
 	}
 
+	@Override
+	public PaginatedList<BuildingEntity> findAllByPaginated(BuildingVO vo, PageRequest pageRequest) {
+		// TODO Auto-generated method stub
+		return dao.findAll(pageRequest);
+	}
 }
