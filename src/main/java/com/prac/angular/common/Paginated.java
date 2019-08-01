@@ -42,7 +42,7 @@ public interface Paginated<TItem> {
     /**
      *  리스트 시작번호를 반환한다. 단 역방향으로 순번을 매긴다.
      */
-	long getReversNo();
+	long getReverseNo();
 	
     /**
      *  첫번째 페이지를 반환한다.

@@ -23,6 +23,13 @@ public class PageRequest implements Pageable{
 	private Sort sort;
 	
     /**
+     * 기본 생성자
+     */
+    public PageRequest(){
+        this((Sort) null);
+    }
+	
+    /**
      * 생성자.
      * @param orders
      * 		정렬식 리스트

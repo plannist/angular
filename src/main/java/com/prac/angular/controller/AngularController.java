@@ -53,8 +53,6 @@ public class AngularController {
 	@PersistenceContext
 	public EntityManager entityManager;
 	
-//	@Resource(name="sessionFactory")
-//	private SessionFactory sessionFactory;
 	
 	@RequestMapping("/login.do")
 	public String login() {

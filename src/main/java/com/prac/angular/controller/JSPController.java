@@ -36,8 +36,9 @@ public class JSPController {
 		log.debug("/building 패스 인입");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("buildList");
-		 PageRequest request = new PageRequest(1, 10);
-		PaginatedList<BuildingEntity> building = buildingService.findAllByPaginated(vo, request);
+//		PageRequest request = new PageRequest(1, 10);
+		
+		PaginatedList<BuildingEntity> building = buildingService.findAllByPaginated(vo, vo.getPageRequest());
 		mv.addObject("data", building);
 		return mv;
 	}

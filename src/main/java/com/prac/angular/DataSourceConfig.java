@@ -1,5 +1,33 @@
 package com.prac.angular;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+
+import javax.naming.NamingException;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
+import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.jndi.JndiObjectFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+import lombok.extern.slf4j.Slf4j;
+
 //import javax.sql.DataSource;
 //
 //import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,6 +51,9 @@ package com.prac.angular;
 //@MapperScan(basePackages= {"com.prac.angular.mapper"})
 //@PropertySource("classpath:/db.properties")
 public class DataSourceConfig {
+	
+	@Autowired
+	DataSourceInfo dsInfo;
 //	@Autowired
 //	Environment evn; //evn 은 @PropertySource 에 등록된 경로 프로퍼티 소스의 데이터를 자동으로 담고있다. 
 //	
@@ -60,7 +91,147 @@ public class DataSourceConfig {
 //	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
 //		return new SqlSessionTemplate(sqlSessionFactory);
 //	}
-	
-	
+
+///////////////////////////////// 아래 주석 풀면 hibernate sessionFactory 사용 가능 yml 자동 설정이아닌 수동 hibernate 설정임 /////////////////////
+//    /**
+//     * <pre>
+//     * 1. Summary : dataSource bean 을 생성한다.
+//     * 2. Details : dataSource bean 을 생성한다.
+//     *
+//     * 3. LastModifiedDate :
+//     * 4. LastReviewedDate :
+//     * 5. History
+//     * 		2015. 11. 30. writing comments
+//     *
+//     * </pre>
+//     *
+//     * @return dataSource instance
+//     * @
+//     *       @throws
+//     *       NamingException
+//     * @throws IllegalArgumentException
+//     * @throws Exception
+//     */
+//    @Bean(name = "dataSource")
+//    public DataSource dataSourceConfig() 
+//    {
+//    	
+//        BasicDataSource dataSource = new BasicDataSource();
+////        dataSource.setDriverClassName(dsInfo.getDataSourceValue("driver-class-name"));
+////        dataSource.setUrl(dsInfo.getDataSourceValue("url"));
+////        dataSource.setUsername( dsInfo.getDataSourceValue("username"));
+////        dataSource.setPassword(dsInfo.getDataSourceValue("password"));
+//        
+//        dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
+//        dataSource.setUrl("jdbc:oracle:thin:@plannist.cn97lepujcj7.ap-northeast-2.rds.amazonaws.com:1521:ORCL");
+//        dataSource.setUsername("plannist");
+//        dataSource.setPassword("pjh871107");
+//        
+//        //System.out.println("========================dsInfo 정보:"+dsInfo.getDataSource());
+//        return dataSource;
+//        
+//    }
+//
+//
+//
+//
+//
+//    /**
+//     * <pre>
+//     * 1.  Summary : sessionFactory bean 을 생성한다.
+//     * 2.  Details : sessionFactory bean 을 생성한다.
+//     *
+//     * 3. LastModifiedDate :
+//     * 4. LastReviewedDate :
+//     * 5. History
+//     * 		2015. 12. 11. writing comments
+//     *
+//     * </pre>
+//     *
+//     * @return
+//     * @throws SQLException 
+//     * @
+//     */
+//    @Bean(name = "localSessionFactoryBean")
+//    public LocalSessionFactoryBean sessionFactoryBeanConfig()
+//    {
+////        System.out.println("=============dataSourceInfo: " + dsInfo.getDataSource());
+////        System.out.println("=============hibernateInfo: " + dsInfo.getHibernate());
+//        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+//        sessionFactoryBean.setDataSource(dataSourceConfig());
+//        // sessionFactoryBean.setPackagesToScan("com.ubivelox.zeus4j.common.domain");
+//        sessionFactoryBean.setPackagesToScan("com.prac.angular");
+//        Properties hibernateProperties = new Properties();
+////        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
+////        hibernateProperties.setProperty("hibernate.format_sql", "true");
+////        hibernateProperties.setProperty("hibernate.jdbc.batch_size", "0");
+////        hibernateProperties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+////        hibernateProperties.setProperty("hibernate.generate_statistics", "true");
+////        hibernateProperties.setProperty("hibernate.jdbc.use_streams_for_binary", "true");
+////        hibernateProperties.setProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+////        hibernateProperties.setProperty("hibernate.connection.charSet", "UTF-8");
+////        hibernateProperties.setProperty("hibernate.validator.apply_to_ddl", "false");
+////        hibernateProperties.setProperty("hibernate.validator.autoregister_listeners", "false");
+//        
+//        
+//        {
+//
+//            for ( Entry<String, String> entry : dsInfo.getHibernate().entrySet() )
+//            {
+//               
+//                hibernateProperties.setProperty(entry.getKey(), entry.getValue());
+//            }
+//        }
+//        sessionFactoryBean.setHibernateProperties(hibernateProperties);
+//        return sessionFactoryBean;
+//    }
+//
+//
+//
+//
+//
+//    @Bean(name = "sessionFactory")
+//    public SessionFactory sessionFactoryConfig()
+//    {	
+//    	SessionFactory sessionFactory = sessionFactoryBeanConfig().getObject();
+//        return sessionFactory;
+//    }
+//
+//
+//
+//
+//
+//    @Bean
+//    public HibernateTransactionManager jpaTransactionManager() {
+//    	System.out.println("=============jpaTransactionManager: 인입");
+//    	HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+//        transactionManager.setSessionFactory(sessionFactoryConfig());
+//        return transactionManager;
+//    }
+//    
+//    @Primary
+//    @Bean(name = "entityManagerFactory")
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//    	System.out.println("=============EntityManagerFactory: 인입");
+////      Map<String, String> propertiesHashMap = new HashMap<>();
+////      propertiesHashMap.put("hibernate.ejb.naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy");
+//      LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+//      factory.setJpaVendorAdapter(vendorAdaptor());
+//      factory.setDataSource(dataSourceConfig());
+//      factory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+//      factory.setPackagesToScan("com.prac.angular.entity");
+//      Properties jpaProperties = new Properties();
+//      jpaProperties.setProperty("show-sql", "true");
+//      factory.setJpaProperties(jpaProperties);
+//      //factory.getJpaPropertyMap().put("hibernate.dialect", TiberoDialect.class.getName());
+//      //factory.afterPropertiesSet();
+//      return factory;
+//    }
+//    
+//    private HibernateJpaVendorAdapter vendorAdaptor() {
+//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        vendorAdapter.setShowSql(true);
+//        return vendorAdapter;
+//    }
 
 }

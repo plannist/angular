@@ -8,9 +8,12 @@
 </head>
 <body>
 	빌딩 리스트 인입
-	
+	<div class=>
 	<script type="text/javascript">
 		
+		var data = "${data.items[0].address}";
+		console.log("data: ", data);
 	</script>
+	<tag:paginate items="${data}"/>
 </body>
 </html>

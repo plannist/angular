@@ -23,6 +23,7 @@ public abstract class BaseVO {
 	
 	public int getPage() {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		return ServletRequestUtils.getIntParameter(request, "page", 1);
+		int page = ServletRequestUtils.getIntParameter(request, "page", 1);
+		return page;
 	}
 }

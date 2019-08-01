@@ -2,8 +2,6 @@ package com.prac.angular.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-
 import com.prac.angular.common.PageRequest;
 import com.prac.angular.common.PaginatedList;
 import com.prac.angular.entity.BuildingEntity;

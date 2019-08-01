@@ -116,7 +116,7 @@ public class PaginatedInfo<TItem> implements Paginated<TItem>, Serializable {
 	@Override
 	public long getTotalCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.totalCount;
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class PaginatedInfo<TItem> implements Paginated<TItem>, Serializable {
 	}
 
 	@Override
-	public long getReversNo() {
+	public long getReverseNo() {
 		return this.reversNo;
 	}
 
@@ -178,7 +178,7 @@ public class PaginatedInfo<TItem> implements Paginated<TItem>, Serializable {
 
 	@Override
 	public int getBeginPageOfPrevUnit() {
-		return 0;
+		return this.beginPageOfPrevUnit;
 	}
 
 	@Override

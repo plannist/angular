@@ -5,6 +5,11 @@
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%-- <%@ taglib prefix="s" uri="/struts-tags" %> --%>
-<%@ taglib prefix="utils" uri="http://stsm/tags/utils" %>
+<%-- <%@ taglib prefix="utils" uri="http://stsm/tags/utils" %> --%>
 
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.extends.js"></script>
+<link rel="stylesheet" type="text/css" href='<c:url value="/css/jquery-ui-1.8.17.custom.css"/>' />
+<link rel="stylesheet" type="text/css" href='<c:url value="/css/common.css"/>' />
