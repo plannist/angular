@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.prac.angular.common.PageRequest;
 import com.prac.angular.common.PaginatedList;
+import com.prac.angular.common.Utils;
 import com.prac.angular.dao.BuildingEntityDao;
 import com.prac.angular.dao.NamedQueryDao;
 import com.prac.angular.entity.BuildingEntity;
@@ -44,9 +45,10 @@ public class BuildingServiceImpl implements BuildingService {
 	}
 
 	@Override
-	public PaginatedList<BuildingEntity> findAllByPaginated(BuildingVO vo, PageRequest pageRequest) {
+	public BuildingVO findAllByPaginated(BuildingVO vo, PageRequest pageRequest) {
 		// TODO Auto-generated method stub
-		int page = vo.getPage();
-		return dao.findAll(new BuildingEntity(), pageRequest);
+		vo.setBuilding(dao.findAll(new BuildingEntity(), pageRequest));
+		vo.setRowNum(Utils.getRowNumber(vo));
+		return vo;
 	}
 }

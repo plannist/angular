@@ -18,6 +18,7 @@ import lombok.Setter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.Persistent;
 
 import com.prac.angular.common.BaseVO;
 import com.prac.angular.common.PageRequest;

@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.prac.angular.common.PageRequest;
 import com.prac.angular.common.PaginatedList;
 import com.prac.angular.common.Sort;
+import com.prac.angular.common.Utils;
 import com.prac.angular.entity.BuildingEntity;
 import com.prac.angular.entity.UserEntity;
 import com.prac.angular.model.BuildingVO;
@@ -38,8 +40,15 @@ public class JSPController {
 		mv.setViewName("buildList");
 //		PageRequest request = new PageRequest(1, 10);
 		
-		PaginatedList<BuildingEntity> building = buildingService.findAllByPaginated(vo, vo.getPageRequest());
+		BuildingVO building = buildingService.findAllByPaginated(vo, vo.getPageRequest());
 		mv.addObject("data", building);
+		
 		return mv;
+	}
+	
+	@RequestMapping("paginatedBuildList")
+	public @ResponseBody PaginatedList<BuildingEntity> paginatedBuildList(BuildingVO vo) {
+		log.debug("paginatedBuildList 인입@", vo.getPage());
+		return null;
 	}
 }

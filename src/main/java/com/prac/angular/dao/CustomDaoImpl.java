@@ -71,7 +71,9 @@ public class CustomDaoImpl<E> implements CustomDao<E>  {
 		CriteriaQuery<E> criteria =  (CriteriaQuery<E>) builder.createQuery(e.getClass());
 		Root<E> root = (Root<E>) criteria.from(e.getClass());
 		CriteriaQuery<E> select = criteria.select(root);
-		
+		select.orderBy(builder.desc(root.get("buRdate")));
+		//데이터 조회할 필드명 입력. rownum은 해당없음...
+		//select.select(root.get("rownum"));
 		TypedQuery<E> typedQuery = entity.createQuery(select);
 		int firstResult = pageable.getOffset();
 		int maxResult = pageable.getSize();

@@ -2,6 +2,9 @@ package com.prac.angular.generic;
 
 import org.junit.Test;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class JenericTestStarter {
 	@Test
 	public void test() {
@@ -12,6 +15,6 @@ public class JenericTestStarter {
 		generic.put("key3", "value3");
 		generic.put("key4", "value4");
 		
-		System.out.println("go Get: {}"+generic.get("key3"));
+		log.debug("go Get: {}", generic.get("key3"));
 	}
 }

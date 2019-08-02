@@ -17,6 +17,11 @@ logging:
 
 server:
   port: 7001
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+    
   
 db:
   dataSource:
@@ -62,6 +67,8 @@ spring:
         hibernate:
           format_sql: true
           enable_lazy_load_no_trans: true
+     
+     
 #    
 #    hibernate:
 #      naming:

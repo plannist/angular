@@ -7,7 +7,7 @@
 		$(function(){
 			$(".link_page").click(function(e){
 				e.preventDefault();
-				
+				console.log("paginate.tag 클릭 인입 ==================");
 				var page = $(this).attr("rel");
 				if(page > 0){
 					$.postURL("", {page:page});
