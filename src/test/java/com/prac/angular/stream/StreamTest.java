@@ -12,12 +12,15 @@ import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.prac.angular.entity.PhoneEntity;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class StreamTest {
 	@Test
 	public void test() {
 		List<String> list = Arrays.asList("a", "b", "c", "c1", "c2", "d");
 		list.stream().filter(e -> e.startsWith("c")).map(String::toUpperCase).sorted().forEach(System.out::println);
-		
+
 		List<String> streamList = list.stream().map(String::toUpperCase).collect(Collectors.toList());
 		streamList.stream().forEach(System.out::println);
 		System.out.println("========================");

@@ -23,7 +23,7 @@ public final class Utils {
 	public static List<Integer> getRowNumber(BaseVO pageInfo) {
 		int page = pageInfo.getPage();
 		int pageSize = pageInfo.getPageSize();
-		int beginRow = (page * pageSize) - pageSize;
+		int beginRow = (page * pageSize) - pageSize + 1;
 		if(beginRow < 1) {
 			beginRow = 1;
 		}

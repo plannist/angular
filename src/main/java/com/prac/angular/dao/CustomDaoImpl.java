@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.prac.angular.common.Pageable;
+import com.prac.angular.common.Paginated;
 import com.prac.angular.common.PaginatedList;
 import com.prac.angular.entity.BuildingEntity;
 
@@ -84,8 +85,6 @@ public class CustomDaoImpl<E> implements CustomDao<E>  {
 		CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);
 		countQuery.select(builder.count(countQuery.from(e.getClass())));
 		long total = entity.createQuery(countQuery).getSingleResult();
-		
-		
 		return new PaginatedList(resultList, pageable, total);
 	}
 	

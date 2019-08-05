@@ -18,7 +18,7 @@
 
 	<div class="paging">
 		<c:if test="${items.hasPrevUnit}">
-			<a href="#" rel="${items.endPageOfPrevUnit}" class="link-page ico btn_page_frist"><i><fmt:message key="paginate.tag.front"/></i></a>
+			<a href="#" rel="${items.endPageOfPrevUnit}" class="link-page ico btn_page_frist"><i></i></a>
 		</c:if>
 		<span class="page_num">
 		<c:forEach var="page" begin="${items.beginPage}" end="${items.endPage}">
@@ -33,7 +33,7 @@
 		</c:forEach>
 		</span>
 		<c:if test="${items.hasNextUnit}">
-			<a href="#" rel="${items.beginPageOfNextUnit}" class="link-page ico btn_page_last"><i><fmt:message key="paginate.tag.tail"/></i></a>
+			<a href="#" rel="${items.beginPageOfNextUnit}" class="link-page ico btn_page_last"><i></i></a>
 		</c:if>
 	</div>
 

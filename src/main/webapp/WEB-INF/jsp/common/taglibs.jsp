@@ -13,3 +13,4 @@
 <script type="text/javascript" src="/js/jquery.validate.extends.js"></script>
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/jquery-ui-1.8.17.custom.css"/>' />
 <link rel="stylesheet" type="text/css" href='<c:url value="/css/common.css"/>' />
+<link rel="stylesheet" type="text/css" href='<c:url value="/css/button.css"/>' />

@@ -1,6 +1,13 @@
 package com.prac.angular.service;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +55,12 @@ public class BuildingServiceImpl implements BuildingService {
 	public BuildingVO findAllByPaginated(BuildingVO vo, PageRequest pageRequest) {
 		// TODO Auto-generated method stub
 		vo.setBuilding(dao.findAll(new BuildingEntity(), pageRequest));
+		List<String> strDate = new ArrayList<>();
+		vo.getBuilding().forEach(e -> {
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");			
+			strDate.add(format.format(e.getBuRdate()));
+		});
+		vo.setRegDate(strDate);
 		vo.setRowNum(Utils.getRowNumber(vo));
 		return vo;
 	}
