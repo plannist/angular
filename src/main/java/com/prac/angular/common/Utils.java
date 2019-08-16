@@ -3,10 +3,6 @@ package com.prac.angular.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-import com.prac.angular.entity.BuildingEntity;
-
 public final class Utils {
 	public static void println(String str) {
 		System.out.println("\u001B[31m"+str);

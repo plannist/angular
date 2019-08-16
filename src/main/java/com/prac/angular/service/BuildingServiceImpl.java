@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.hibernate.SessionFactory;
@@ -20,6 +22,7 @@ import com.prac.angular.common.Utils;
 import com.prac.angular.dao.BuildingEntityDao;
 import com.prac.angular.dao.NamedQueryDao;
 import com.prac.angular.entity.BuildingEntity;
+import com.prac.angular.entity.PriceEntity;
 import com.prac.angular.model.BuildingVO;
 
 @Service
@@ -54,7 +57,7 @@ public class BuildingServiceImpl implements BuildingService {
 	@Override
 	public BuildingVO findAllByPaginated(BuildingVO vo, PageRequest pageRequest) {
 		// TODO Auto-generated method stub
-		vo.setBuilding(dao.findAll(new BuildingEntity(), pageRequest));
+		vo.setBuilding(dao.findAll(new BuildingEntity(), pageRequest, null));
 		List<String> strDate = new ArrayList<>();
 		vo.getBuilding().forEach(e -> {
 			DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");			
@@ -63,5 +66,23 @@ public class BuildingServiceImpl implements BuildingService {
 		vo.setRegDate(strDate);
 		vo.setRowNum(Utils.getRowNumber(vo));
 		return vo;
+	}
+	
+	@Override
+	public BuildingVO findSearchByPaginated(BuildingVO vo, PageRequest pageRequest) {
+		Map<String, Object> param = new HashMap<>();
+		if(! Utils.isNullOrEmpty(vo.getAddress())) {
+			param.put("address", "%"+vo.getAddress()+"%");
+		}
+		if(! Utils.isNullOrEmpty(vo.getBuildType())) {
+			if(!"A".equals(vo.getBuildType())) {
+				param.put("buildType", vo.getBuildType());
+			}
+		}
+		if(! Utils.isNullOrEmpty(vo.getPrice())) {
+			param.put("price", vo.getPrice());
+		}
+		vo.setBuilding(dao.findAll(new BuildingEntity(), pageRequest, param));
+		return vo;	
 	}
 }

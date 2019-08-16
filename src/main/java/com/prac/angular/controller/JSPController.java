@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.prac.angular.entity.UserEntity;
 import com.prac.angular.model.BuildingVO;
+import com.prac.angular.search.BuildingSearch;
 import com.prac.angular.service.BuildingService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +54,14 @@ public class JSPController {
 		result.put("rownum", vo.getRowNum());
 		result.put("regDate", vo.getRegDate());
 		result.put("searchType", vo.getBuildType());
+		return result;
+	}
+	
+	@RequestMapping("/searchBuildList")
+	public @ResponseBody Map<String, Object> searchBuildList(BuildingVO vo){
+		Map<String, Object> result = new HashMap<>();
+		vo = buildingService.findSearchByPaginated(vo, vo.getPageRequest());
+		log.debug("param map 확인:"+ vo.getPage());
 		return result;
 	}
 }

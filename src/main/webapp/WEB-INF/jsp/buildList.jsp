@@ -37,8 +37,8 @@
 							<tr>
 	        					<th><label for="pro1">주소</label></th>
 	        					<td class="input">
-									<input type="text" name="crn" value='<c:out value="${param.crn}"/>' title='주소' 
-										   maxlength="120" id="pro1" style="width:100%;" onkeydown="javascript:if(event.keyCode == 13){searchList();}"/>
+									<input type="text" name="address" value='<c:out value="${param.address}"/>' title='주소' 
+										   maxlength="120" id="address" style="width:100%;" onkeydown="javascript:if(event.keyCode == 13){searchList();}"/>
 										   
 								</td>
 							</tr>
@@ -73,15 +73,75 @@
 							</colgroup>
 							<tbody>
 							<tr>
-	        					<th><label for="appLifecycleCode">가격</label></th>
-	        					<td class="input">
-									<select name="appLifecycleCode" title="전체" class="ui_sel" id="appLifecycleCode" style="width:100%;">
+	        					<th><label for="price">가격</label></th>
+	        					
+	        					<td class="input" id="price_choose">
+								<!--매물종류 all 선택시 표시 template -->
+	        					<script id="priceAllTempl" type="text/x-jquery-tmpl">
+									<select name="price" title="전체" class="ui_sel" id="price" style="width:100%;">
 								    	<option value="all" >전체</option>
-								    	<c:forEach var="appLifeCycleCode" items="${appLifeCycleCodes}">
-						            		<option value="<c:out value="${appLifeCycleCode.code}"/>" ><c:out value="${appLifeCycleCode.description}" /></option>
-					                	</c:forEach>
-						        	</select>							
+						        	</select>
+								</script>
+								
+								<!--매물종류 매매 선택시 표시 template -->
+								<script id="priceSaleTempl" type="text/x-jquery-tmpl">
+									<select name="price" title="매매 금액" class="ui_sel" id="price" style="width:100%">
+										<option value="0~10000" >1억원 이하 매물</option>
+										<option value="10000~20000" >1억~2억원 매물</option>
+										<option value="20000~30000" >2억~3억원 매물</option>
+										<option value="30000~40000" >3억~4억원 매물</option>
+										<option value="40000~50000" >4억~5억원 매물</option>
+										<option value="50000~" >5억원 이상 매물</option>
+									</select>
+								</script>
+								
+								<!--매물종류 전세 선택시 표시 template -->
+								<script id="priceLeaseTempl" type="text/x-jquery-tmpl">
+									<select name="price" title="전세 금액" class="ui_sel" id="price" style="width:100%">
+										<option value="0~5000" >5천만원 이하 매물</option>
+										<option value="5000~10000" >5천만 ~ 1억원 매물</option>
+										<option value="10000~15000" >1억 ~ 1억5천만원 매물</option>
+										<option value="15000~20000" >1억5천만 ~ 2억원 매물</option>
+										<option value="20000~25000" >2억 ~ 2억5천만원 매물</option>
+										<option value="25000~30000" >2억5천만 ~ 3억원 매물</option>
+										<option value="30000~" >3억원 이상 매물</option>
+									</select>
+								</script>
+								
+								<!-- 매물종류 월세 선택시 표시 template -->
+								<script id="priceDepositTempl" type="text/x-jquery-tmpl">
+									<select name="deposit" title="보증금" class="ui_sel" id="deposit" style="width:100%">
+										<option value="0~10000" >1억원 이하 매물</option>
+										<option value="10000~20000" >1억~2억원 매물</option>
+										<option value="20000~30000" >2억~3억원 매물</option>
+										<option value="30000~40000" >3억~4억원 매물</option>
+										<option value="40000~50000" >4억~5억원 매물</option>
+										<option value="50000~" >5억원 이상 매물</option>
+									</select>
+								</script>
+																
 								</td>
+								
+							</tr>
+							<tr id="monthly_table">
+								<!-- 매물종류 반전세, 월세 선택시 표시 template -->
+								<script id="priceMonthlyTempl" type="text/x-jquery-tmpl">
+									<th><label for="monthly">월 세</label></th>
+										<td class="input" id="price_choose1">
+											<select name="monthly" title="월세" class="ui_sel" id="monthly" style="width:100%">
+												<option value="0~10" >10만원 이하 매물</option>
+												<option value="10~20" >10만 ~ 20만원 매물</option>
+												<option value="20~30" >20만 ~ 30만원 매물</option>
+												<option value="30~40" >30만 ~ 40만원 매물</option>
+												<option value="40~50" >40만 ~ 50만원 매물</option>
+												<option value="50~60" >40만 ~ 50만원 매물</option>
+												<option value="60~70" >40만 ~ 50만원 매물</option>
+												<option value="70~80" >40만 ~ 50만원 매물</option>
+												<option value="80~90" >40만 ~ 50만원 매물</option>
+												<option value="100~" >100만원 이상 매물</option>
+											</select>
+										</td>
+								</script>
 							</tr>
 							</tbody>
 						</table>
@@ -147,14 +207,53 @@
 		</table>
 	</div>
 	<script type="text/javascript">
-		var page = -1;
-		
+		var page = 1;
+		var PRICE_ALL_TEMP = $('#priceAllTempl').template();
+		var PRICE_SALE_TEMP = $('#priceSaleTempl').template();
+		var PRICE_LEASE_TEMP = $('#priceLeaseTempl').template();
+		var PRICE_DEPOSIT_TEMP = $('#priceDepositTempl').template();
+		var PRICE_MONTHLY_TEMP = $('#priceMonthlyTempl').template();
+		var PRICE_CHOOSE = $('#price_choose');
+		var MONTHLY_TABLE = $('#monthly_table');
 		$(document).ready(function(){
+			var data = PRICE_DEPOSIT_TEMP.data;
+			$.tmpl(PRICE_DEPOSIT_TEMP, data).appendTo(PRICE_CHOOSE);
+				
 			$(".link-page").click(function(){
 				page = $(this).attr('rel');
 				console.log("page: ", page);
 				makeList();
 			});
+			
+			
+		});
+		
+		$('#buildType').change(function(e){
+			var type = $('select option:selected').val();
+			PRICE_CHOOSE.empty();
+			MONTHLY_TABLE.empty();
+			if(type == 'all'){
+				var data = PRICE_ALL_TEMP.data;
+				$.tmpl(PRICE_All_TEMP, data).appendTo(PRICE_CHOOSE);
+				MONTHLY_TABLE.empty();
+			}else if(type == 1){//매매
+				var data = PRICE_SALE_TEMP.data;
+				$.tmpl(PRICE_SALE_TEMP, data).appendTo(PRICE_CHOOSE);
+			}else if(type == 2){//전세
+				var data = PRICE_LEASE_TEMP.data;
+				$.tmpl(PRICE_LEASE_TEMP, data).appendTo(PRICE_CHOOSE);
+			}else if(type == 3){//월세
+				var data = PRICE_DEPOSIT_TEMP.data;
+				$.tmpl(PRICE_DEPOSIT_TEMP, data).appendTo(PRICE_CHOOSE);
+				data = PRICE_MONTHLY_TEMP.data;
+				$.tmpl(PRICE_MONTHLY_TEMP, data).appendTo(MONTHLY_TABLE);
+			}else if(type == 4){//반전세
+				var data = PRICE_DEPOSIT_TEMP.data;
+				$.tmpl(PRICE_DEPOSIT_TEMP, data).appendTo(PRICE_CHOOSE);
+				data = PRICE_MONTHLY_TEMP.data;
+				$.tmpl(PRICE_MONTHLY_TEMP, data).appendTo(MONTHLY_TABLE);
+			}
+			console.log("selected type: ", type);
 		});
 		
 		function makeList(){
@@ -214,6 +313,23 @@
 			});
 		};
 		
+		function searchList(){
+			
+			$.ajax({
+				url : "/searchBuildList",
+				type : "POST",
+				dataType : "json",
+				data: {
+					page : page,
+					address : $('#address').val(),
+					buildType : $('#buildType').val(),
+					price : $('#price').val()
+				},
+				success : function(response){
+					console.log("success 인입");
+				}
+			})
+		};
 	</script>
 	<div id="pagiList">
 		<tag:paginate items="${data.building}"/>

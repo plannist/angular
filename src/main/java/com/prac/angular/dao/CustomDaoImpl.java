@@ -1,6 +1,8 @@
 package com.prac.angular.dao;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import com.prac.angular.common.Pageable;
 import com.prac.angular.common.Paginated;
 import com.prac.angular.common.PaginatedList;
+import com.prac.angular.common.Utils;
 import com.prac.angular.entity.BuildingEntity;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,11 +70,25 @@ public class CustomDaoImpl<E> implements CustomDao<E>  {
 	//이방법을 사용하자
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public PaginatedList<E> findAll(E e, Pageable pageable) {
+	public PaginatedList<E> findAll(E e, Pageable pageable, Map<String, Object> where) {
 		CriteriaBuilder builder = entity.getCriteriaBuilder();
 		CriteriaQuery<E> criteria =  (CriteriaQuery<E>) builder.createQuery(e.getClass());
 		Root<E> root = (Root<E>) criteria.from(e.getClass());
 		CriteriaQuery<E> select = criteria.select(root);
+		
+		if(!Utils.isNullOrEmpty(where)) {
+			for(Entry<String, Object>entry : where.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+				if(value.toString().contains("%")) {
+					criteria.where(builder.like(root.get(key), value.toString()));
+				}else {
+					criteria.where(builder.equal(root.get(key), value));
+				}
+				
+			}			
+		}
+		
 		select.orderBy(builder.desc(root.get("buRdate")));
 		//데이터 조회할 필드명 입력. rownum은 해당없음...
 		//select.select(root.get("rownum"));

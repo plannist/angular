@@ -13,5 +13,9 @@ public class BuildingVO extends BaseVO{
 	private PaginatedList<BuildingEntity> building;
 	private List<Integer> rowNum;
 	private List<String> regDate;
+	
 	private String buildType;
+	private String price;
+	private String address;
+	
 }

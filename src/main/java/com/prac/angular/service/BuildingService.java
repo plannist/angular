@@ -12,5 +12,6 @@ public interface BuildingService {
 	List<BuildingEntity> findByAddressContaining(String address);
 	BuildingEntity findJoinPrice();
 	List<BuildingEntity> innerSelect(String address);
-	BuildingVO findAllByPaginated(BuildingVO vo, PageRequest request);
+	BuildingVO findAllByPaginated(BuildingVO vo, PageRequest pageRequest);
+	BuildingVO findSearchByPaginated(BuildingVO vo, PageRequest pageRequest);
 }
