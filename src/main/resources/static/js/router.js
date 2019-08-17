@@ -71,6 +71,10 @@
 			url: '/buildList',
 			controller: 'buildListCtrl'
 		})
+		.state('accountBook', {
+			url: '/accountBook',
+			controller: 'accountBookCtrl'
+		})
 		.state('logout', {
 			url : '/logout',
 			controller : 'logoutCtrl'

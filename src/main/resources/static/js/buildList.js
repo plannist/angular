@@ -7,3 +7,9 @@ angular.module('ex').controller('buildListCtrl', function(){
 		location.href = "/buildList";
 	});
 })
+.controller('accountBookCtrl', function(){
+	console.log("accountBookCtrl 인입");
+	$(document).ready(function(){
+		location.href="/accountBook";
+	});
+})

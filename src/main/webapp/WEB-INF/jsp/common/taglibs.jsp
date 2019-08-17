@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="utils" uri="http://stsm/tags/utils" %>
+<%-- <%@ taglib prefix="utils" uri="http://stsm/tags/utils" %> --%>
 <%-- <%@ taglib prefix="s" uri="/struts-tags" %> --%>
 <%-- <%@ taglib prefix="utils" uri="http://stsm/tags/utils" %> --%>
 

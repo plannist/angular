@@ -64,4 +64,9 @@ public class JSPController {
 		log.debug("param map 확인:"+ vo.getPage());
 		return result;
 	}
+	
+	@RequestMapping("/accountBook")
+	public String accountBook() {
+		return "accountBook";
+	}
 }
