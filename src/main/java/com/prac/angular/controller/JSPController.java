@@ -69,4 +69,9 @@ public class JSPController {
 	public String accountBook() {
 		return "accountBook";
 	}
+	
+	@RequestMapping("barcodeTest")
+	public String barcodeTest() {
+		return "barcode";
+	}
 }

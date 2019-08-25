@@ -13,3 +13,9 @@ angular.module('ex').controller('buildListCtrl', function(){
 		location.href="/accountBook";
 	});
 })
+.controller('barcodeCtrl', function(){
+	console.log('barcodeCtrl 인입');
+	$(document).ready(function(){
+		location.href="/barcodeTest";
+	});
+})

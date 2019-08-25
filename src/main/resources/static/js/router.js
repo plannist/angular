@@ -79,6 +79,10 @@
 			url : '/logout',
 			controller : 'logoutCtrl'
 		})
+		.state('barcode', {
+			url: '/barcode',
+			controller: 'barcodeCtrl'
+		})
 		$urlRouterProvider.otherwise('/');
 //        .when("/login", {templateUrl : "../login.html", controller : "loginPage"})
 //        .when("/promise", {templateUrl : "../promise.html", controller : "promiseCtrl"})

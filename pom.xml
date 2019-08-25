@@ -197,7 +197,15 @@
 		<artifactId>spring-boot-configuration-processor</artifactId>
 		<optional>true</optional>
 	</dependency>
-	</dependencies>
+	
+	<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate 뭐가 문제인지 몰라서 추가 해결책 아님 .m2 폴더 날리고 실행됨 -->
+<!-- 	<dependency> -->
+<!-- 	    <groupId>org.hibernate</groupId> -->
+<!-- 	    <artifactId>hibernate</artifactId> -->
+<!-- 	    <version>3.2.6.ga</version> -->
+<!-- 	</dependency> -->
+  
+  </dependencies>
 	
 
 

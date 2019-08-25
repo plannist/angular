@@ -6,7 +6,6 @@ logging:
       prac:
         angular: debug
    
-
     org:
       hibernate:
         type:

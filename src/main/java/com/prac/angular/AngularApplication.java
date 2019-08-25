@@ -80,7 +80,8 @@ public class AngularApplication {
 			.logoutUrl("/logout")
 			//.addLogoutHandler(logoutHandler)
 			.logoutSuccessHandler(logoutSuccessHandler)
-			.and().csrf().disable();
+			.and().csrf();
+			//disabled();
 			//.anyRequest()
 			//.authenticated();
 		}
