@@ -12,6 +12,11 @@
 	canvas.drawing, canvas.drawingBuffer {position: absolute; left: 0; top: 0;}
 </style>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#modalOpen").click(function(){
+		$("#livestream_scanner").modal();
+	})
+});
 $(function() {
 	// Create the QuaggaJS config object for the live stream
 	var liveStreamConfig = {
@@ -94,6 +99,8 @@ $(function() {
 	Quagga.onDetected(function(result) {    		
 		if (result.codeResult.code){
 			$('#scanner_input').val(result.codeResult.code);
+			console.log("result: ", result);
+			alert("result:"+result);
 			Quagga.stop();	
 			setTimeout(function(){ $('#livestream_scanner').modal('hide'); }, 1000);			
 		}
@@ -122,7 +129,8 @@ $(function() {
 		<div class="input-group">
 			<input id="scanner_input" class="form-control" placeholder="Click the button to scan an EAN..." type="text" /> 
 			<span class="input-group-btn"> 
-				<button class="btn btn-default" type="button" data-toggle="modal" data-target="#livestream_scanner">
+<!-- 				<button class="btn btn-default" type="button" data-toggle="modal" data-target="#livestream_scanner"> -->
+					<button class="btn btn-default" id="modalOpen">
 					<i class="fa fa-barcode"></i>
 				</button> 
 			</span>
