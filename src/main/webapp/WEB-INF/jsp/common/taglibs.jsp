@@ -27,14 +27,16 @@
 
 
 <script type="text/javascript">
-	$.ajaxPrefilter(function (options) { 
-		var headerName = '${_csrf.headerName}'; 
-		var token = '${_csrf.token}'; 
-		if (options.method === 'POST' || options.method === 'post'|| options.type === 'post' || options.type === 'POST') {
-			console.log("csrf 해더 설정 인입: "+headerName);
-			options.headers = options.headers || {}; 
-			options.headers[headerName] = token; 
-		} 
-	});
+// 	$.ajaxPrefilter(function (options) { 
+// 		var headerName = '${_csrf.headerName}'; 
+// 		var token = '${_csrf.token}'; 
+// 		console.log("headerName: ", headerName);
+// 		console.log("token: ", token);
+// 		if (options.method === 'POST' || options.method === 'post'|| options.type === 'post' || options.type === 'POST') {
+// 			console.log("csrf 해더 설정 인입: "+headerName);
+// 			options.headers = options.headers || {}; 
+// 			options.headers[headerName] = token; 
+// 		} 
+// 	});
 </script>
 

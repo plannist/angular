@@ -1,16 +1,36 @@
+logging:
+  file: /home/ubuntu/spring-boot-app.log
+  level:
+    root: info
+    com:
+      prac:
+        angular: debug
+   
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
+
+
 server:
   port: 7001
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+    
   
 db:
   dataSource:
-    url: jdbc:oracle:thin:@fullhouse.c1d2wea4uxbf.ap-northeast-2.rds.amazonaws.com:1521:JAVA
+    url: jdbc:oracle:thin:@plannist.cn97lepujcj7.ap-northeast-2.rds.amazonaws.com:1521:ORCL
     driver-class-name: oracle.jdbc.OracleDriver
-    username: station4
+    username: plannist
     password: pjh871107
   hibernate:
     hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
 #    hibernate.query.substitutions: true 'Y', false 'N'
-    hibernate.format_sql: true
     hibernate.jdbc.batch_size: 0
 #    hibernate.cache.provider_class: org.hibernate.cache.SingletonEhCacheProvider
 #    hibernate.cache.use_second_level_cache: true
@@ -23,32 +43,38 @@ db:
     hibernate.connection.charSet: UTF-8
     hibernate.validator.apply_to_ddl: false
     hibernate.validator.autoregister_listeners: false
+    hibernate.show_sql: true
+    hibernate.format_sql: true
 #    connection.driver.class: oracle.jdbc.OracleDriver
 #    connection.url: jdbc:oracle:thin:@fullhouse.c1d2wea4uxbf.ap-northeast-2.rds.amazonaws.com:1521:JAVA
 #    connection.username: station4
 #    connection.password: pjh871107
-
+             
+      
+  
 spring:
     datasource:
-      url: jdbc:oracle:thin:@fullhouse.c1d2wea4uxbf.ap-northeast-2.rds.amazonaws.com:1521:JAVA
+      url: jdbc:oracle:thin:@plannist.cn97lepujcj7.ap-northeast-2.rds.amazonaws.com:1521:ORCL
       driver-class-name: oracle.jdbc.OracleDriver
-      username: station4
+      username: plannist
       password: pjh871107
     jpa:
       show-sql: true
-#    database: oracle
-#    database-platform: org.hibernate.dialect.Oracle10gDialect
-#    generate-ddl: false
+
     
       properties:
         hibernate:
           format_sql: true
           enable_lazy_load_no_trans: true
+     
+     
 #    
 #    hibernate:
 #      naming:
 #        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
     
+#    mvc:
+#    static-path-pattern: /resources/static/**    
  
   
 ---
@@ -59,4 +85,4 @@ spring:
     aggressiveLazyLoading: false
     mapUnderscoreToCamelCase: true
     
-    
+  

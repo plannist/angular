@@ -2,20 +2,25 @@
 <%@ attribute name="items" required="true" type="com.prac.angular.common.PaginatedList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${items.totalCount gt 0}">
-	<script type="text/javascript">
-		$(function(){
-			$(".link_page").click(function(e){
-				e.preventDefault();
-				console.log("paginate.tag 클릭 인입 ==================");
-				var page = $(this).attr("rel");
-				if(page > 0){
-					$.postURL("", {page:page});
-				}
-			});
-		});
-	</script>
 
+	<script type="text/javascript">
+// 		$(function(){
+// 			$(".link_page").click(function(e){
+// 				e.preventdefault();
+// 				console.log("paginate.tag 클릭 인입 ==================");
+// 				var page = $(this).attr("rel");
+// 				if(page > 0){
+// 					$.posturl("", {page:page});
+// 				}
+// 			});
+// 		});
+
+		
+	
+		
+	</script>
+	
+<c:if test="${items.totalCount gt 0}">
 	<div class="paging">
 		<c:if test="${items.hasPrevUnit}">
 			<a href="#" rel="${items.endPageOfPrevUnit}" class="link-page ico btn_page_frist"><i></i></a>

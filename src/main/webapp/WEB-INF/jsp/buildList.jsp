@@ -257,12 +257,12 @@
 		});
 		
 		function makeList(){
-			
+			console.log("makeList 인입");
 			
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "paginatedBuildList",
+				url : "/paginatedBuildList",
 				data : {page : page},
 				success: function(response){
 					$('#buildingList').empty();
