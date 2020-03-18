@@ -10,12 +10,15 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
-@Order(1)
-@Component
-public class Producer implements CommandLineRunner{
+//@Order(999)
+//@Component
+public class Producer 
+//implements CommandLineRunner
+{
 
-	@Override
+//	@Override
 	public void run(String... args) throws Exception {
+		Thread.sleep(1000);
 		Properties props = new Properties();
 		props.put("bootstrap.servers", "175.118.126.12:9092");
 		props.put("acks", "all");
@@ -29,13 +32,18 @@ public class Producer implements CommandLineRunner{
 		  KafkaProducer kafkaProducer = new KafkaProducer(props);
 	        try{
 	            for(int i = 0; i < 100; i++){
-	                System.out.println(i);
+	                System.out.println("kafka send 직전 ::"+i);
 	                kafkaProducer.send(new ProducerRecord("PJS", Integer.toString(i), "test message - " + i ));
+	                System.out.println("kafka send 직후 ::"+i);
 	            }
 	        }catch (Exception e){
+	        	System.out.println("exception 발생");
 	            e.printStackTrace();
 	        }finally {
-	            kafkaProducer.close();
+//	        	System.out.println("producer 닫기 직전");
+//	            kafkaProducer.close();
+//	            System.out.println("producer 닫은 후");
+	        	
 	        }
 		 
 		 

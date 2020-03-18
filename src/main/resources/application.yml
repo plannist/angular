@@ -66,6 +66,8 @@ spring:
         hibernate:
           format_sql: true
           enable_lazy_load_no_trans: true
+    
+   
      
      
 #    
@@ -85,4 +87,9 @@ spring:
     aggressiveLazyLoading: false
     mapUnderscoreToCamelCase: true
     
-  
+---
+spring:
+  kafka:
+    consumer:
+      group-id: kafka-intro
+    bootstrap-servers: 175.118.126.12:9092  
