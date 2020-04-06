@@ -28,7 +28,6 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 		System.out.println("loginSuccessHandler 인입 @@@@@");
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", authentication.getName());
-		
 		Cookie cookie = new Cookie(COOKIE_NAME, authentication.getName());
 		cookie.setMaxAge(maxAge);
 		response.addCookie(cookie);

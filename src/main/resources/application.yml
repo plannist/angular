@@ -91,5 +91,5 @@ spring:
 spring:
   kafka:
     consumer:
-      group-id: kafka-intro
+      group-id: test-consumer-group
     bootstrap-servers: 175.118.126.12:9092  
